@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>timeout</title>
+    <style>
+        #demo{
+            width: 400px;
+            height: 400px;
+            margin: 100px auto;
+            text-align: center;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+<div id="demo">
+
+</div>
+<script type="text/javascript">
+    var demo = document.getElementById("demo"),
+        count = 5;
+    setTimeout(coane,1000);
+    function coane() {
+        demo.innerHTML = "<a　href='http://www/baidu.com'>将在" + count + "秒之后跳转</a>"
+        count--;
+        if(count == 0){
+            window.location.href = "http://www.weibo.com"
+        }
+        else
+        {
+            setTimeout(coane,1000);
+        }
+    }
+</script>
+</body>
+</html>

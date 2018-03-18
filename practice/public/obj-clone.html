@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>深度克隆</title>
+</head>
+<body>
+</body>
+<script type="text/javascript">
+// 判断属性是否是引用类型
+// 判断引用类型属性的类型
+// 建立该类型的属性
+    function deepClone(origin) {
+        if (typeof origin != 'object'|| origin === null) {
+            return origin;
+        }
+        if (origin instanceof Array) {
+            var target = [];
+            for (var i = 0; i < origin.length; i++) {
+                target[i] = arguments.callee(origin[i]);
+            }
+        } else {
+            var target = {};
+                for (prop in origin) {
+                    if (origin.hasOwnProperty(prop)) {
+                        target[prop] = arguments.callee(origin[prop]);
+                    }
+                }
+        }
+        return target;
+    }
+</script>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>留言发布</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        ul{list-style: none}
+        .box{
+            margin: 100px auto;
+            width: 600px;
+            height: auto;
+            padding: 30px 10px;
+            border: 1px solid #cccccc;
+        }
+        .box textarea{
+            width: 450px;
+            height: 200px;
+            resize: none;
+        }
+        #lists li{
+            width: 450px;
+            line-height: 20px;
+            border-bottom: 1px dashed #cccccc;
+            margin-left: 30px;
+        }
+        #lists li a{
+            float: right;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <span>留言:</span>
+    <textarea placeholder="请输入"></textarea>
+    <button>发布</button>
+    <ul id="lists"></ul>
+</div>
+</body>
+<script type="text/javascript">
+    window.onload = function () {
+        var box = document.getElementsByClassName("box")[0],
+            lists = document.getElementById("lists"),
+            texts = box.getElementsByTagName("textarea")[0],
+            btn = box.getElementsByTagName("button")[0];
+        btn.onclick = function(){
+            if (texts.value == ""){
+                alert("内容不能为空")
+                return false;
+            }
+            var newli= document.createElement("li");
+            newli.innerHTML = texts.value + "<a href='javascript:;'>删除</a>";
+//            在li中添加a标签
+//            newli.innerText = texts;
+//            var newa = document.createElement("a");
+//            newa.href = "javascript:;"
+//            newa.innerText = "删除";
+//            newli.appendChild(newa);
+            texts.value = "";
+            //使添加节点保持在最前
+            if(lists.children.length == 0){//第一次创建
+                lists.appendChild(newli);
+            }else
+            {
+                lists.insertBefore(newli,lists.children[0])
+            }
+//            for(var i=0,lg=lists.children.length;i<lg;i++){
+//                lists.children[i].getElementsByTagName("a")[0].onclick =function () {
+//                    lists.removeChild(this.parentNode);
+//                }
+//            }
+
+            newli.getElementsByTagName("a")[0].onclick = function () {
+                lists.removeChild(this.parentNode);
+            }
+        }
+    }
+</script>
+</html>

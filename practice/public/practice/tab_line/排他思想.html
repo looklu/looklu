@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>排他思想</title>
+    <style>
+        .show{
+            background-color: pink;
+        }
+        #contents>div{
+            width: 200px;
+            height: 100px;
+            background-color: pink;
+            display: none;
+        }
+        #contents>.kk{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div id="btn_box">
+    <button>按钮1</button>
+    <button>按钮2</button>
+    <button>按钮3</button>
+    <button>按钮4</button>
+    <button>按钮5</button>
+</div>
+<div id="contents">
+    <div class="kk">1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+</div>
+<script>
+    window.onload = function () {
+        var btn_box = document.getElementById("btn_box"),
+            btn = btn_box.getElementsByTagName("button"),
+            contents = document.getElementById("contents"),
+            divs = contents.getElementsByTagName("div");
+        for(var i=0,le=btn.length;i<le;i++){//为每个button添加事件
+            btn[i].index = i;
+            btn[i].onclick = function () {
+                for(var j=0;j<le;j++){//清除所有button的className
+                    btn[j].className = "";
+                    divs[j].className = "";
+                }
+                this.className = "show";//为自己添加className
+                divs[this.index].className += "kk";
+            }
+        }
+    }
+</script>
+</body>
+</html>

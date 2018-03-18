@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>bind模拟实现</title>
+    <style>
+    div{
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(to left top,#fff 0%,orange);
+    }
+    </style>
+</head>
+<body>
+    <div>cst handsome</div>
+</body>
+<script>
+    var list = {
+        init: function (){
+            this.message = "hello word";
+            this.bindEvent();
+        },
+        bindEvent: function (){
+            var oDiv = document.getElementsByTagName("div")[0];
+            console.log(this);
+            oDiv.onclick = this.show;
+        },
+        show: function (e){
+             console.log(e.target);
+        }
+    };
+    list.init();
+
+    function Car(a,b,c){
+        this.color = a;
+        pao = function (){
+            console.log(this.color);
+        }
+    }
+    var car1 = new Car();
+    class Car{
+        color;
+        constructor(){
+
+        }
+        run(){
+
+        }
+    }
+    class Benz extends Car{
+        constructor(){
+
+        }
+        fastRun(){
+
+        }
+    }
+
+    var benz = new Car();
+    benz.prototype.constructor
+    benz.run();
+</script>
+</html>

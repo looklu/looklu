@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .clearfix:before,.clearfix:after{content: "";display: table;}
+        .clearfix:after{clear:both;}
+        a{
+            text-decoration: none;
+        }
+        #box{
+            width: 350px;
+            height: 250px;
+            border: 1px solid #ccc;
+            padding: 5px;
+        }
+
+        .hd a{
+            color: #00B7FF;
+            font-size: 20px;
+            font-weight: 500;
+        }
+        .hd{
+            margin-bottom: 20px;
+        }
+
+        .bdLeft,.bdRight{
+            float: left;
+        }
+        .bdLeft a{
+            display: inline-table;
+            width: 50px;
+            height: 50px;
+            background: url("astroIcon.png") 0 0 no-repeat;
+        }
+        .bdRight{
+            margin-left: 20px;
+        }
+        .yunshiLayout{
+            width: 180px;
+            height: 18px;
+            line-height: 18px;
+            position: relative;
+            font-size: 14px;
+        }
+        .yunshiBg{
+            width: 80px;
+            height: 18px;
+            background:url("yunshi.png") no-repeat;
+            position: absolute;
+            top: 0;
+            left: 90px;
+        }
+        .yunshi{
+            width: 50px;
+            height: 18px;
+            background:url("yunshi.png") 0 -27px no-repeat;
+        }
+        .ft{
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div class="hd">
+        <a href="javascript:;">星座运势</a>
+    </div>
+    <div class="bd clearfix">
+        <div class="bdLeft">
+            <a href="javascript:;"></a>
+        </div>
+        <div class="bdRight">
+            <select class="xingzuoSelect">
+                <option value="0">白羊座(03.21-04.19)</option>
+                <option value="1">金牛座(04.20-05.20)</option>
+                <option value="2">双子座(05.21-06.21)</option>
+                <option value="3">巨蟹座(06.22-07.22)</option>
+                <option value="4">狮子座(07.23-08.22)</option>
+                <option value="5">处女座(08.23-09.22)</option>
+                <option value="6">天秤座(09.23-10.23)</option>
+                <option value="7">天蝎座(10.24-11.22)</option>
+                <option value="8">射手座(11.23-12.21)</option>
+                <option value="9">摩羯座(12.22-01.19)</option>
+                <option value="10">水瓶座(01.20-02.18)</option>
+                <option value="11">双鱼座(02.19-03.20)</option>
+            </select>
+            <div class="yunshiLayout">
+                <p>今日运势：</p>
+                <div class="yunshiBg">
+                    <div class="yunshi"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ft">
+        <span>白羊座有一种让人看见就觉得开心的感觉，因为总是看起来都是那么地热情、阳光、乐观、坚强、充满活力...</span>
+        <a href="javascript:;">[详细]</a>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    window.onload = function () {
+        var xzSelect = document.getElementsByClassName("xingzuoSelect")[0],
+            bdLeft = document.getElementsByClassName("bdLeft")[0],
+            yunshi = document.getElementsByClassName("yunshi")[0],
+            ft = document.getElementsByClassName("ft")[0];
+//        用户选择时
+        xzSelect.onchange = function(){
+            var i = this.value;
+            xingzuo(i);
+        }
+
+//        星座函数
+        function xingzuo(a,b,texts,url) {
+            xzSelect.value = a;
+            bdLeft.getElementsByTagName("a")[0].style.backgroundPositionY=(-50)*a + "px";
+            yunshi.style.width = 5*b + "px";
+            ft.getElementsByTagName("span")[0].innerText = texts;
+            if(url){
+                ft.getElementsByTagName("a")[0].href = url;
+            }else {
+                ft.getElementsByTagName("a")[0].href = "javascript:;";
+            }
+
+        }
+
+
+//        var obj = "jintyianchiganlema "
+//        xingzuo(3,2,obj,"httP://www.baidu.com")
+    }
+</script>
+</html>

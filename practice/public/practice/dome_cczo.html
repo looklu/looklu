@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>nodesAct</title>
+</head>
+<style>
+    #box{
+        width: 500px;
+        height: 500px;
+        border: 1px solid #ccc;
+        text-align: center;
+    }
+    #box>div{
+        width: 120px;
+        height: 120px;
+        border: 1px solid #ccc;
+        margin: 30px auto;
+    }
+</style>
+<body>
+<div id="box">
+    <div>
+        <div>a1</div>
+        <div>a2</div>
+        <div>a3</div>
+    </div>
+    <div id="dom">
+        <div>b1</div>
+        <div>b2</div>
+        <div>b3</div>
+    </div>
+    <div>
+        <div>c1</div>
+        <div>c2</div>
+        <div>c3</div>
+    </div>
+</div>
+<script type="text/javascript">
+    function $(id) {
+        return document.getElementById(id);
+    }
+    var newspan = document.createElement("span")
+    newspan.innerText = "nihao"
+    $("dom").appendChild(newspan); //添加子元素
+
+</script>
+</body>
+</html>

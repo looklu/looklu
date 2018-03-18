@@ -1,0 +1,147 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    width: 100%;
+    height: 100%;
+}
+/* 开始游戏 */
+.startPag{
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: rgba(0,0,0,.8);
+}
+.startbtn{
+    width: 200px;
+    height: 175px;
+    background: url(start.png) no-repeat;
+    background-size: 100%;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom:0;
+    left: 0;
+    margin: auto;
+}
+
+.wrapper{
+    background:url(bgk.png) no-repeat ;
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 500px;
+}
+.leftside{
+    position:absolute;
+    left: 0;
+    top: 0;
+    width: 25%;
+    height: 100%;
+}
+.leftbtn{
+    position:absolute;
+    top: 15%;
+    right: 25%;
+    width: 75px;
+    height: 75px;
+    background:url(btn.png);
+}
+.scorebox{
+    position:absolute;
+    top: 5%;
+    right: 5%;
+    width: 270px;
+    height: 150px;
+    background: url(score.png);
+    z-index: 11;
+    opacity: 0.8;
+    cursor: move;
+}
+.score,.hightscore{
+    display: block;
+    width: 20%;
+    height: 20%;
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+}
+.content{
+    width: 75%;
+    height: 62%;
+    position: absolute;
+    bottom: 5%;
+    left: 12.5%;
+    border:5px double black;
+    z-index: 10
+}
+/* 游戏结束 */
+.lose{
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    background: rgba(0,0,0,.8);
+}
+.losebtn{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    width: 600px;
+    height: 500px;
+    background: url(end.png);
+    background-size: 100% 100%;
+}
+.losebtn>div:nth-last-child(2){
+    position: absolute;
+    left: 5.5%;
+    bottom: 2%;
+    width: 20%;
+    height: 15%;
+    cursor: pointer;
+}
+.losebtn>div:last-child{
+    position: absolute;
+    right: 5.5%;
+    bottom: 2%;
+    width: 20%;
+    height: 15%;
+    cursor: pointer;
+}
+.lose .score{
+    padding-left: 50px; 
+}
+.food{
+    background: url(apple.png);
+    background-size: 100% 100%;
+
+}
+.snake.head{
+    width: 20px;
+    height: 20px;
+    background: url(1.png);
+    background-size: 100% 100%;
+}
+.snake.body{
+    width: 20px;
+    height: 20px;
+    background: url(2.png);
+    background-size: 100% 100%;
+}

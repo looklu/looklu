@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>封装tab栏</title>
+</head>
+<style>
+    .box{
+        width: 500px;
+        height: 300px;
+        border: 1px solid #fff;
+    }
+    .mt>span{
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        background-color: #afd9ee;
+        margin-right: 5px;
+    }
+    .mt>span.current{
+        background-color: #00B7FF;
+    }
+
+    .mb>div{
+        height: 200px;
+        background-color: #00B7FF;
+        display: none;
+    }
+    .mb>div.active{
+        display: block;
+    }
+</style>
+<body>
+<div id="one" class="box">
+    <div class="mt">
+        <span class="current">男装</span>
+        <span>女装</span>
+        <span>童装</span>
+        <span>休闲</span>
+        <span>运动</span>
+    </div>
+    <div class="mb">
+        <div class="active">男装</div>
+        <div>女装</div>
+        <div>童装</div>
+        <div>休闲</div>
+        <div>运动</div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    window.onload = function () {
+        function tab(obj) {
+            var targets = document.getElementById(obj);
+            var spans = targets.getElementsByClassName("mt")[0].getElementsByTagName("span");
+            var divs = targets.getElementsByClassName("mb")[0].getElementsByTagName("div");
+            for(var i=0,le=spans.length;i<le;i++){
+                spans[i].index = i;
+                spans[i].onmousemove = function () {
+                    for(var j=0;j<le;j++){
+                        spans[j].className = "";
+                        divs[j].className = "";
+                    }
+                    this.className += "current";
+                    divs[this.index].className += "active";
+                }
+            }
+
+        }
+        tab("one");
+    }
+</script>
+</html>

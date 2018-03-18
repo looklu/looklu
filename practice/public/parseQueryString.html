@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>把URL参数解析为一个对象</title>
+</head>
+<body>
+<script type="text/javascript">
+    var url = 'http://www.taobao.com/index.php?user=anonymous&id=123&id=456&city=%E6%9D%AD%E5%B7%9E&key0=0&key1=1&key2=2';
+    url = decodeURI(url);
+    function parseQueryString(url){
+        var obj = {};
+        var start = url.indexOf("?")+1;
+        var str = url.substr(start);
+        var arr = str.split("&");
+        var arr0 = [];
+        for (var i=0;i<arr.length;i++){
+            var arr2 = arr[i].split("=");
+            if(arr2[0] === "id"){
+                arr0.push(arr2[1]);
+            }else {
+                obj[arr2[0]] = arr2[1];
+            }
+
+        }
+        obj.id = arr0;
+        return obj;
+    }
+    console.log(parseQueryString(url));
+
+
+    //将一个任意长的数字变成逗号分割的形式
+
+</script>
+</body>
+</html>

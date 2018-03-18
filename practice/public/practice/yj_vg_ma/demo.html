@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="index.css">
+    <title>验证码</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="inputBox">
+            <input type="text" class="input" placeholder="请输入验证码">
+            <span class="pic"></span>
+            <span class="errorText"></span>
+        </div>
+        <div class="canvasBox">
+            <div class="imgBox">
+                <canvas id="canvasStr" width="300" height="80"></canvas>
+            </div>
+            <span class="refresh">
+        </div>
+        <button type="submit" class="submit">提交</button>
+    </div>
+</body>
+<script src="../../jquery.js"></script>
+<script src="index.js"></script>
+</html>

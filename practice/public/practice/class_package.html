@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>class封装</title>
+</head>
+<body>
+<p>
+    get.elementsByClassName()在IE6、7、8中不支持，因此在开发向下兼容的项目时，需要用到封装自己的class类方法
+</p>
+<div>
+    <div class="dom"></div>
+    <div class="test"></div>
+</div>
+<div class="test">
+    <div id="box">
+        <div>
+            <div class="dom test"></div>
+            <div class="test"></div>
+            <div class="dome"></div>
+            <div class="bottom test"></div>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="dom"></div>
+    <div class="dom test"></div>
+    <div class="test"></div>
+</div>
+</body>
+<script type="text/javascript">
+    window.onload = function () {
+        /*function getClass(className) {
+//            判断浏览器是否支持直接获取className的方法
+            if(document.getElementsByClassName){
+                return document.getElementsByClassName(className);
+            }else {
+//                获取 body部分
+                var body = document.body,
+                    arr = [];
+                var dom =document.getElementsByTagName("*");//获取body内所有标签
+                for(var i=0,le=dom.length;i<le;i++){
+                    if(dom[i].className == className){
+                        arr.push(dom[i]);
+                    }
+                }
+                return arr;
+            }
+        }
+        alert(getClass("dom").length);*/
+
+//        最终版，有id时限制在id范围内，对于"dom className"有空格格式的className获取
+        function getClass(className,id) {
+//            首先判断浏览器是否支持获取className
+            if(document.getElementsByClassName){
+                if(id){
+                    return document.getElementById(id).getElementsByClassName(className);
+                }else {
+                    return document.getElementsByClassName(className);
+                }
+            }else{
+                //当不支持时
+                if(id){
+                    var targets = document.getElementById(id),
+                    dom = targets.getElementsByTagName("*");
+                }else {
+                    var dom = document.body.getElementsByClassName("*");
+                }
+                var arry = [];
+                for(var i=0,ile=dom.length;i<ile;i++){
+                    var texts = dom[i].className.split(" ");
+                    for(var j=0,jle=texts.length;j<jle;j++){
+                        if(texts[j] == className){
+                            arry.push(dom[i])
+                        }
+                    }
+                }
+                return arry;
+            }
+        }
+        var aa=getClass("test","box");
+        console.log(aa.length);
+    }
+</script>
+</html>

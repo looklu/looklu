@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>滑动数字时钟</title>
+    <style>
+        body{background-color: #eb041b}
+        .column,.coln{
+            font-size: 86px;
+            /*background-color: ;*/
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <div class="column">
+        <div>0</div>
+        <div>1</div>
+        <div>2</div>
+    </div>
+    <div class="column">
+        <div>0</div>
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+        <div>7</div>
+        <div>8</div>
+        <div>9</div>
+    </div>
+    <div class="coln">:</div>
+    <div class="column">
+        <div>0</div>
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+    </div>
+    <div class="column">
+        <div>0</div>
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+        <div>7</div>
+        <div>8</div>
+        <div>9</div>
+    </div>
+    <div class="coln">:</div>
+    <div class="column">
+        <div>0</div>
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+    </div>
+    <div class="column">
+        <div>0</div>
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+        <div>7</div>
+        <div>8</div>
+        <div>9</div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    function Index(dom,use24Hours){
+        this.column = Array.from(dom);
+        this.use24Hours = use24Hours;
+        this.classList = ['visible','close','far','far','distant'];
+        this.start();
+    }
+    Index.prototype.start = fuction(){
+        var self = this;
+        var d = new Date
+    }
+    new Index($('.column'),true);
+</script>
+</html>

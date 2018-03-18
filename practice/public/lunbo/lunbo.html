@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轮播图</title>
+    <script type="text/javascript" src="../lib/jquery/dist/jquery.min.js"></script>
+    <!--调用外部css样式-->
+    <link rel="stylesheet" href="lunbo.css">
+    <!--调用外部js动画样式-->
+    <script type="text/javascript" src="lunbo_animate.js"></script>
+    <!--调用外部滚动样式-->
+    <script type="text/javascript" src="slider.js"></script>
+</head>
+<body>
+<!--大盒子，分别命名css样式使用的class名称和js使用的id名称-->
+<div class="css_box" id="js_box">
+    <!--滚动的slider盒子-->
+    <div class="slider">
+        <!--滚动盒子的主要部分-->
+        <div class="slider-main" id="slider_main_block">
+            <div class="slider-main-img"><a href="#"><img src="../images/1.png" alt="数字1"></a></div>
+            <div class="slider-main-img"><a href="#"><img src="../images/2.png" alt="数字2"></a></div>
+            <div class="slider-main-img"><a href="#"><img src="../images/3.png" alt="数字3"></a></div>
+            <div class="slider-main-img"><a href="#"><img src="../images/4.png" alt="数字4"></a></div>
+            <div class="slider-main-img"><a href="#"><img src="../images/5.png" alt="数字5"></a></div>
+        </div>
+    </div>
+    <!--左右控制的两个span-->
+    <div class="slider_ctrl" id="slider_ctrl">
+        <span class="slider-ctrl-prev"></span>
+        <span class="slider-ctrl-next"></span>
+    </div>
+</div>
+</body>
+</html>

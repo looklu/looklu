@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #times{
+            width: 200px;
+            height: 100px;
+            background-color: #1b6d85;
+            text-align: center;
+        }
+        #times span{
+            display: block;
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            color: #cccccc;
+            vertical-align: middle;
+        }
+        #times p{
+            margin: 0;
+            width: 100%;
+            background-color: #985f0d;
+            color: #000;
+            line-height: 70px;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+<!--时钟-->
+<div id="times"></div>
+<script type="text/javascript">
+    (function () {
+        var times = document.getElementById("times");
+        var span1= document.createElement("span"),
+        p1 = document.createElement("p");
+        times.appendChild(span1);
+        times.appendChild(p1);
+        timeOuts();
+        function timeOuts() {
+            var dates = new Date();
+            span1.innerText = dates.toLocaleDateString();
+            p1.innerText = dates.toTimeString().substr(0,8);
+            setTimeout(timeOuts,1000)
+        }
+    })()
+</script>
+<!--倒计时-->
+<div id="backwards">
+    <div>
+        <h3>倒计时计算</h3>
+        <input type="text" placeholder="xxxx/xxxx/xxxx">
+        <input type="button" value="计算">
+    </div>
+    <div></div>
+</div>
+<script type="text/javascript">
+    var backwards = document.getElementById("backwards"),
+    btn = backwards.getElementsByTagName("input")[1];
+    btn.onclick = function () {
+        var texts = backwards.getElementsByTagName("input")[0].value,
+        endtime = new Date(texts);
+        var dates = new Date();
+        var cha = endtime - dates;
+        var spand = document.createElement("span");
+        spand.innerText = cha/1000 + "秒";
+        backwards.children[1].appendChild(spand);
+
+    }
+</script>
+</body>
+</html>

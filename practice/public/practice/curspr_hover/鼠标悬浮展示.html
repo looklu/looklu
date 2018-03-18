@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>鼠标悬浮展示</title>
+    <style>
+        body{
+            /*box-sizing: border-box;*/
+        }
+        .box{
+            width: 430px;
+            height: 600px;
+            padding: 500px 0 25px 25px;
+            position: relative;
+        }
+        .box>img{
+            width: 50px;
+            height: 50px;
+            margin-right: 12px;
+            padding: 1px;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+        .box>img:hover{
+            border: 2px solid #ff5500;
+        }
+
+        .shows{
+            width: 100%;
+            height:450px;
+            position: absolute;
+            top: 25px;
+            left: 25px;
+        }
+        .shows img{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="shows">
+        <img id="shows" src="1.jpg" alt="加载失败">
+    </div>
+    <img src="1.jpg" alt="加载失败">
+    <img src="2.jpg" alt="加载失败">
+    <img src="3.jpg" alt="加载失败">
+    <img src="4.jpg" alt="加载失败">
+</div>
+</body>
+<script>
+    window.onload = function () {
+        var shows = document.getElementById("shows"),
+            box = document.getElementsByClassName("box")[0],
+            imgs = box.getElementsByTagName("img");
+        for (var i=1;i < imgs.length;i++){
+            imgs[i].onmousemove = function () {
+                        shows.src = this.src;
+            }
+        }
+//        function fun() {
+//            for (var i=1;i < imgs.length;i++){
+//                imgs[i].onmousemove = function () {
+//                    shows.src = this.src;
+//                }
+//            }
+//        }
+//        fun();
+    }
+</script>
+</html>
