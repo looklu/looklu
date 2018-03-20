@@ -1,0 +1,24 @@
+账号信息(通用与公司网站项目所有账号,svn,ftp,尤米优库系统后台)
+用户名:wangzhanshi
+密码：Ncjaz1Mt
+123456
+
+svn项目地址:
+UI地址:https://101.37.87.198:2233/svn/JieKongUI/
+编译源码:https://101.37.87.198:2233/svn/FrontDevelopment/
+
+公司网站项目
+系统后台:http://testadmin.jkvending.com/
+商户后台:http://testbiz.jkvending.com/
+支付系统(不能直接访问):http://pay.jkvending.com/
+PC端官网:http://www.jkvending.com/
+微信端官网:http://wx.hzjkkj.cn
+
+尤米优库项目(这个是为客户开发的系统)
+超级管理员系统后台(我方使用):http://ymadmin.jkvending.com/
+系统后台:http://ym.jkvending.com/
+商户后台:http://ymbiz.jkvending.com/
+支付系统:http://ympay.jkvending.com/
+
+101.37.87.198 测试服务器
+120.27.251.106 正式服务器、
