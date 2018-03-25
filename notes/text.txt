@@ -3,6 +3,9 @@
 密码：Ncjaz1Mt
 123456
 
+jkvending@foxmail.com
+Jk88697990
+
 svn项目地址:
 UI地址:https://101.37.87.198:2233/svn/JieKongUI/
 编译源码:https://101.37.87.198:2233/svn/FrontDevelopment/
