@@ -3,6 +3,17 @@
 密码：Ncjaz1Mt
 123456
 
+<<<<<<< HEAD
+保利威视
+jkvending@foxmail.com
+Jk88697990
+
+
+=======
+jkvending@foxmail.com
+Jk88697990
+
+>>>>>>> 50b11951a56c7697fec19099176220ee9f67fc9f
 svn项目地址:
 UI地址:https://101.37.87.198:2233/svn/JieKongUI/
 编译源码:https://101.37.87.198:2233/svn/FrontDevelopment/
@@ -22,3 +33,12 @@ PC端官网:http://www.jkvending.com/
 
 101.37.87.198 测试服务器
 120.27.251.106 正式服务器、
+
+view-source:http://localhost:53914/Admin/Advert/AdRecordEdit.aspx?AdvertID=15032
+upload.aspx
+ //第二次提交
+ 
+ http://testym.jkvending.com/Admin/Manage/Default.aspx
+ 
+ 微信端官网
+ http://localhost:22319/User/Index.aspx?openid=oDZdjxJk-nElDex5V7cAfjRi-3T8
