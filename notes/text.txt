@@ -3,7 +3,6 @@
 密码：Ncjaz1Mt
 123456
 
-<<<<<<< HEAD
 保利威视
 jkvending@foxmail.com
 Jk88697990
@@ -13,7 +12,6 @@ Jk88697990
 jkvending@foxmail.com
 Jk88697990
 
->>>>>>> 50b11951a56c7697fec19099176220ee9f67fc9f
 svn项目地址:
 UI地址:https://101.37.87.198:2233/svn/JieKongUI/
 编译源码:https://101.37.87.198:2233/svn/FrontDevelopment/
