@@ -162,3 +162,10 @@ font-weight： lighter、normal、bold、dolder
 pixelTop整形
 posTop浮点形
 offsetTop
+
+**video全屏处理**
+只需在video标签加个webkit-playsinline属性即可,这个属性基本上在基于webkit内核的移动端都是没问题的.这里的全屏是浏览器视窗内的全屏,并不是整个手机屏幕,当然我们做web前端需要的就是在document的body内的视窗范围的全屏.
+
+    <video src="" webkit-playsinline="true"></video>
+
+    
