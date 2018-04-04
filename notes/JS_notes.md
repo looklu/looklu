@@ -1002,4 +1002,3 @@ var userName = getCookie('userName');   //获取,setCookie设置
         document.cookie = c_name + "=" + escape(value) +
         ((expiredays == null) ? "" : ";expires=" + exdate.toGMTString())
     }
-
