@@ -29,7 +29,11 @@ PC端官网:http://www.jkvending.com/
 
 101.37.87.198 测试服务器
 120.27.251.106 正式服务器
+测试机 http://pay.jkvending.com/?arg=60510002&type=4
 
+
+view-source:http://localhost:53914/Admin/Advert/AdRecordEdit.aspx?AdvertID=15032
+upload.aspx
  //第二次提交
  
  http://testym.jkvending.com/Admin/Manage/Default.aspx
@@ -37,5 +41,5 @@ PC端官网:http://www.jkvending.com/
  微信端官网
  http://localhost:22319/User/Index.aspx?openid=oDZdjxJk-nElDex5V7cAfjRi-3T8
  
- 看看乐
- http://testympay.jkvending.com/user/index.aspx?openid=oDZdjxJk-nElDex5V7cAfjRi-3T8
+ 会员菜单
+ JieKong\JieKongAdmin\Admin\Manage\Web\MemberOpenAdd.aspx
