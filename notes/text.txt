@@ -30,7 +30,7 @@ PC端官网:http://www.jkvending.com/
 101.37.33.173	正式服务器
 120.27.251.106	正式服务器 优米
 测试机 http://pay.jkvending.com/?arg=60510002&type=4
-
+广告看看乐 http://localhost:22319/User/Index.aspx?openid=oDZdjxJk-nElDex5V7cAfjRi-3T8
 
 view-source:http://localhost:53914/Admin/Advert/AdRecordEdit.aspx?AdvertID=15032
 upload.aspx
