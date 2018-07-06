@@ -66,7 +66,7 @@ font-size设置的是字体的高。
 css初始化前最好加上 @charset "UTF-8" 保证字符编码
 input外部背景框轮廓去除 input{outline-style：none;}
 文本域防止拖动 textarea{rasize:none}
-去掉图片底侧默认的3像素空白 img{border:0;vertical-align:middle}|display：block;
+去掉图片底侧默认的3像素空白 img{vertical-align:middle} || display：block;
 表格合并边框 table{border-collapse:collapse;}
 
 让你的内容可编辑，只需要加一个contenteditable属性 
@@ -167,5 +167,30 @@ offsetTop
 只需在video标签加个webkit-playsinline属性即可,这个属性基本上在基于webkit内核的移动端都是没问题的.这里的全屏是浏览器视窗内的全屏,并不是整个手机屏幕,当然我们做web前端需要的就是在document的body内的视窗范围的全屏.
 
     <video src="" webkit-playsinline="true"></video>
+	
+direction: ltr;(表示从左往右的流-默认)
+direction: rtr;(表示从右往左的流)
+	
+改变 CSS 世界纵横规则的 writing-mode
+writing-mode 属性定义了文本水平或垂直排布以及在块级元素中文本的行进方向。
+writing-mode: horizontal-tb;    /* 默认值 文本流是水平方向(horizontal)的，元素是从上往下(tb:top-bottom)堆叠的*/
+writing-mode: vertical-rl;      /* 表示文本是垂直方向(vertical)展示，然后阅读的顺序是从右往左(rl:right-left)，跟我们古诗的阅读顺序一致*/
+writing-mode: vertical-lr;      /*表示文本是垂直方向(vertical)展示，然后阅读的顺序还是默认的从左往右(lr:left-right)，也就是仅仅是水平变垂直*/ 
 
-    
+transition: all 0.6s;表示所有的属性变化在0.6s的时间段内完成。
+transform: scale(1.4);表示在鼠标放到图片上的时候图片按比例放大1.4倍。
+
+清除屏幕下方白条
+	body{
+			overflow-x: hidden;
+			overflow-y: auto;
+		}
+背景色渐变
+background: linear-gradient(to bottom,#000000 0%,#5788fe 100%);
+
+html编码声明
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+js编码声明
+<script type="text/javascript" charset="utf-8" src=""></script>
+css编码声明 写在css文件中
+@charset "utf-8";(必须在文档第一行,双引号此属性才生效)

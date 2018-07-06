@@ -5,15 +5,21 @@
 
 本地调试参数 ?openid=oDZdjxJk-nElDex5V7cAfjRi-3T8
 
-保利威视
+保利威视 http://my.polyv.net/v2/login
 jkvending@foxmail.com
 Jk88697990
+
+物联卡 http://ec.upiot.net
+hzjiekong   96361U
 
 svn项目地址:
 UI地址:https://101.37.87.198:2233/svn/JieKongUI/
 编译源码:https://101.37.87.198:2233/svn/FrontDevelopment/
 
 公司网站项目
+
+http://admin.jkvending.com/admin/Manage/Default.aspx
+
 系统后台:http://testadmin.jkvending.com/
 商户后台:http://testbiz.jkvending.com/
 支付系统(不能直接访问):http://pay.jkvending.com/
@@ -27,6 +33,8 @@ PC端官网:http://www.jkvending.com/
 支付系统:http://ympay.jkvending.com/
 
 101.37.87.198	测试服务器
+
+
 101.37.33.173	正式服务器
 120.27.251.106	正式服务器 优米
 测试机 http://pay.jkvending.com/?arg=60510002&type=4
@@ -45,3 +53,45 @@ upload.aspx
  JieKong\JieKongAdmin\Admin\Manage\Web\MemberOpenAdd.aspx
  
  开锁	/Admin/Manage/Setting/LockManager.aspx
+ 
+购买test 商品列表 http://testpay.jkvending.com/?arg=61015001&type=4
+
+http://pay.jkvending.com/?arg=61015001&type=9&goodsid=20820
+http://pay.jkvending.com/?arg=61015001&type=4
+http://pay.jkvending.com/?arg=61015001,f0102
+http://pay.jkvending.com/?arg=863987036456733,f0102
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+公司名称：杭州捷控科技有限公司
+纳税人识别号：91330110571496361U
+公司注册地址：杭州市余杭区闲林镇闲林工业区闲兴路37号
+公司注册电话：0571－88687166
+开户行：建设银行杭州闲林支行
+开户行账号：33001617481053001848

@@ -763,6 +763,7 @@ window.getComputedStyle(ele,null) //第二个参数可以写伪元素("after"),�
 
     function getStyle(obj,attr){
         if(window.getComputedStyle){
+		
             return window.getComputedStyle(obj,false)[attr];
             }eles{
             return obj.currentStyle[attr];
@@ -1002,3 +1003,16 @@ var userName = getCookie('userName');   //获取,setCookie设置
         document.cookie = c_name + "=" + escape(value) +
         ((expiredays == null) ? "" : ";expires=" + exdate.toGMTString())
     }
+	
+	
+	
+iframe父页面跳转
+window.parent.location.reload();刷新
+window.parent.location.href = 'http://www.xx.com';跳转
+window.parent.frames[1].location.href = 'http://www.xx.com';跳转
+window.parent.frames["name"].location.href = 'http://www.xx.com';父子页面跳转
+
+~是js里的按位取反操作符
+
+location.href是最常用的属性,用于获得或设置窗口的URL，类似于document.url属性。但是采用此方法跳转会被加入到浏览器的历史栈中，这意味着可以通过后退键来撤退。如果用户为了提高安全级别可以采用location.replace(),这种方法不会有历史记录，也不会被后退.
+locaton.reload()方法重新加载本页面，他有两个参数，false和true，默认是false，在浏览器的缓存中获取重新加载，如果想从服务器中获取，可以将参数改为true。

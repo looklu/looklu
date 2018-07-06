@@ -142,3 +142,16 @@ function removeClass(elements, cName) {
 };
 
 // function loadScript(url/src/)
+//屏幕滚动
+function scrollgo(speed,tim){
+    var body = document.body,html = document.documentElement;
+    var aa = Math.max(body.scrollTop,html.scrollTop);
+
+    times = setInterval(function(){
+        console.log(body.scrollTop);
+        console.log(html.scrollTop);
+        aa += speed;
+        window.scrollTo(0,aa);//屏幕滚动
+    },tim);
+}
+scrollgo(2,100);
