@@ -1013,6 +1013,15 @@ window.parent.frames[1].location.href = 'http://www.xx.com';跳转
 window.parent.frames["name"].location.href = 'http://www.xx.com';父子页面跳转
 
 ~是js里的按位取反操作符
+逗号运算符，它将先计算左边的参数，再计算右边的参数值。然后返回最右边参数的值。逗号运算符在JavaScript在的优先级是最低的,在JavaScript中，逗号运算符的优先级比赋值运算符还要底。
+逗号运算符的作用是将若干表达式连接起来。它的优先级别在所有运算符中是最低的，结合方向是"自左至右"的.
+每次通过循环的末端时， for 语句只允许单个表达式被执行。, 运算符被用来允许多个表达式被当作单个表达式，从而规避该限制。
+
 
 location.href是最常用的属性,用于获得或设置窗口的URL，类似于document.url属性。但是采用此方法跳转会被加入到浏览器的历史栈中，这意味着可以通过后退键来撤退。如果用户为了提高安全级别可以采用location.replace(),这种方法不会有历史记录，也不会被后退.
-locaton.reload()方法重新加载本页面，他有两个参数，false和true，默认是false，在浏览器的缓存中获取重新加载，如果想从服务器中获取，可以将参数改为true。
+locaton.reload()方法重新加载本页面，他有两个参数，false和true，默认是false，在浏览器的缓存中获取重新加载，如果想从服务器中获取，可以将参数改为true。(location.reload(url);)
+
+keydown return true up事件不会触发,return false则继续
+
+实时监测input输入变化(jquery)
+$('#elem').on('input propertychange',function(){console.log('哒.哒.哒..);})

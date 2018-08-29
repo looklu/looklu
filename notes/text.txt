@@ -61,6 +61,8 @@ http://pay.jkvending.com/?arg=61015001&type=4
 http://pay.jkvending.com/?arg=61015001,f0102
 http://pay.jkvending.com/?arg=863987036456733,f0102
 
+测试机 802 863987036456733
+
 
 
 

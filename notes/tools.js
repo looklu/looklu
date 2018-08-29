@@ -154,4 +154,67 @@ function scrollgo(speed,tim){
         window.scrollTo(0,aa);//屏幕滚动
     },tim);
 }
-scrollgo(2,100);
+// scrollgo(2,100);
+
+//禁用
+function disabled(elem,time){
+    elem.indexof('#');
+    elem.indexof('.');
+    document.getElementsByClassName(elem);
+}
+
+// 比较时间  时间格式20180706
+function timeContrast(begin,end){
+    if(begin.length != 8 || end.length != 8){
+        DialogMsg("时间格式不对,格式:20180607");
+        return false;
+    }
+    var temp = Math.max(begin,end).toString();
+    begin = Math.min(begin,end).toString();
+    end = temp;
+    var stastr = begin.substr(0,4) + '-' + begin.substr(4,2) + '-' + begin.substr(6,2),
+    endstr = end.substr(0,4) + '-' + end.substr(4,2) + '-' + end.substr(6,2);
+    var statim = Date.parse(stastr),endtim = Date.parse(endstr);
+    if((endtim - statim)>31*24*60*60*1000){
+        DialogMsg("最大间隔时间不能超过31天");
+        return false;                
+    }
+    return true;
+}
+// 获取昨,今,明天时间
+function getDates(num,ico){
+    var dates = new Date();
+    dates.setTime(dates.getTime()+ num*60*60*1000);
+    var month = dates.getMonth()+1,day = datas.getDate();
+    var str = dates.getFullYear() + ico + (month<10?'0'+month:month) + ico + (day<10?'0'+day:day);
+    return str;
+}
+
+//点击 出现文字,上滑慢慢消失
+var a_idx = 0;  
+jQuery(document).ready(function($) {  
+    $("body").click(function(e) {  
+        var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正" ,"法治", "爱国", "敬业", "诚信", "友善");  
+        var $i = $("<span/>").text(a[a_idx]);  
+        a_idx = (a_idx + 1) % a.length;  
+        var x = e.pageX,  
+        y = e.pageY;  
+        $i.css({  
+            "z-index": 9999999999999999999999999999999999999999,  
+            "top": y - 20,  
+            "left": x,  
+            "position": "absolute",  
+            "font-weight": "bold",  
+            "color": "#ff6651"  
+        });  
+        $("body").append($i);  
+        $i.animate({  
+            "top": y - 180,  
+            "opacity": 0  
+        },  
+        1500,  
+        function() {  
+            $i.remove();  
+        });  
+    });
+}); 

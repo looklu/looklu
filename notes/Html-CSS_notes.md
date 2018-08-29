@@ -194,3 +194,13 @@ js编码声明
 <script type="text/javascript" charset="utf-8" src=""></script>
 css编码声明 写在css文件中
 @charset "utf-8";(必须在文档第一行,双引号此属性才生效)
+
+js中elem.style.width="20px";elem.style.height="20px";代码多而且通过JS来覆写对象的样式是比较典型的一种销毁原样式并重建的过程，这种销毁和重建，都会增加浏览器的开销。
+使用 elem.style.cssText="width:20px;height:20px;";可以减少代码量,避免页面多次reflow.
+
+ /* 隐藏 设备列表滚动条 */
+div#device_list::-webkit-scrollbar {
+	display: none;
+}
+
+html颜色,如#ff00ff,六位,调整过透明度后变成了八位,安卓端识别不出来
