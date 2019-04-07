@@ -1025,3 +1025,12 @@ keydown return true up事件不会触发,return false则继续
 
 实时监测input输入变化(jquery)
 $('#elem').on('input propertychange',function(){console.log('哒.哒.哒..);})
+
+//Array Remove - By John Resig (MIT Licensed)//掐头去尾然后拼接
+Array.prototype.remove = function(from, to) {
+  var rest = this.slice((to || from) + 1 || this.length);
+  this.length = from < 0 ? this.length + from : from;
+  return this.push.apply(this, rest);
+};
+
+window.getSelection();选中项

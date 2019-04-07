@@ -8,7 +8,7 @@ r       g       b
 
 margin塌陷(父子)，margin合并(同级)：垂直方向上的margin，以最大值为准
 
-*bfc(block format context)*
+*bfc(block format content)*
 如何触发一个盒子的bfc：
 1. position：absolute；
 2. display：inline-block；
@@ -23,9 +23,7 @@ float：浮动元素产生了浮动流。
 clear float
 
 1. 设置父级样式{overflow:auto} hidden也可以 ，就visible不行
-
 2. 在浮动元素后面添加元素，样式设置为{clear:both; height: 0; line-height: 0;font-size:0}
-
 3. 清除浮动（最好的清除浮动方式）--闭合浮动.clearfix:before,.clearfix:after{content:"";display: table;}.clearfix:after{clear:both;}
 浮动盒子根据内容确定大小（自动撑开），不用设置宽度
 
@@ -190,7 +188,7 @@ background: linear-gradient(to bottom,#000000 0%,#5788fe 100%);
 
 html编码声明
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-js编码声明
+js编码声明(默认是gbk编码)
 <script type="text/javascript" charset="utf-8" src=""></script>
 css编码声明 写在css文件中
 @charset "utf-8";(必须在文档第一行,双引号此属性才生效)
@@ -198,9 +196,27 @@ css编码声明 写在css文件中
 js中elem.style.width="20px";elem.style.height="20px";代码多而且通过JS来覆写对象的样式是比较典型的一种销毁原样式并重建的过程，这种销毁和重建，都会增加浏览器的开销。
 使用 elem.style.cssText="width:20px;height:20px;";可以减少代码量,避免页面多次reflow.
 
- /* 隐藏 设备列表滚动条 */
-div#device_list::-webkit-scrollbar {
-	display: none;
-}
-
 html颜色,如#ff00ff,六位,调整过透明度后变成了八位,安卓端识别不出来
+
+chrome隐藏滚动条并保持滚动: .element::-webkit-scorllbar{display:none;}
+
+inline-bloc元素错位问题:
+如果内联块里的没有文字，则其基线为margin-bottom的下边缘，如果有则为文字的基线
+
+去掉input[type=number]加减按钮(上下箭头)
+/*在谷歌下移除input[number]的上下箭头*/
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button{
+    -webkit-appearance: none !important;
+    margin: 0;
+}
+/*在firefox下移除input[number]的上下箭头*/
+input[type="number"]{-moz-appearance:textfield;}
+
+calac 和flexbox搭配，用来写流式布局非常好；
+calc可以做用于任何具有大小的东东，比如border、margin、pading、font-size和width等属性设置动态值;支持的运算单位：rem , em , percentage , px;计算优先级别和数学一致
+
+
+超出隐藏
+overflow: hidden;text-overflow: ellipsis;white-space: normal;word-break: keep-all;
+
