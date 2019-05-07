@@ -1034,3 +1034,17 @@ Array.prototype.remove = function(from, to) {
 };
 
 window.getSelection();选中项
+
+// val = val.replace(/\n/g,'_j_k');
+// arr = val.split('_j_k');
+根据回车换行拆分
+
+多个逗号语句,都会执行,并且返回最后一个结果
+逗号表达式的一般形式是：表达式1，表达式2，表达式3……表达式n
+逗号表达式的求解过程是：先计算表达式1的值，再计算表达式2的值，……一直计算到表达式n的值。最后整个逗号表达式的值是表达式n的值。
+
+encodeURI() 编码(; / ? : @ & = + $ , # '不进行编码) 对整个URL进行编码
+decodeURI() 解码
+
+encodeURIComponent() 编码 它用于对URL的组成部分 进行个别编码，而不用于对整个URL进行编码
+decodeURIComponent() 解码

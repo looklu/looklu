@@ -47,8 +47,7 @@ function getElementPosition(obj){
     return {
         x : x,
         y : y
-    }
-        
+    }     
 }
 
 // 获取显示样式数据

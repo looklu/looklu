@@ -6,12 +6,16 @@ jkvending@foxmail.com  Jk88697990
 
 物联卡 http://ec.upiot.net  hzjiekong   96361U
 
-https://qa-merchant.poseidong.com/ 账号：15356112787密码：qamerchant
+售货机 https://qa-merchant.poseidong.com/ 账号：15356112787密码：qamerchant
+萤火商城 https://demo.yiovo.com/index.php?s=/store/index/index
 
 svn项目地址:
 UI地址:https://101.37.87.198:2233/svn/JieKongUI/
 编译源码:https://101.37.87.198:2233/svn/FrontDevelopment/
 
+
+会员
+http://pay.jkvending.com/u1525908841/Index.aspx?openid=oA3355mou5BuSRUl5m2rGdhGmnVw&m=1&p=172&unionid=oHxJhwYWZ3XF_rDuiqROQRxWQ4NE
 公司网站项目
 系统后台:http://testadmin.jkvending.com/
 商户后台:http://testbiz.jkvending.com/
@@ -19,6 +23,9 @@ UI地址:https://101.37.87.198:2233/svn/JieKongUI/
 PC端官网:http://www.jkvending.com/
 微信端官网:http://wx.hzjkkj.cn
 API主页:http://testopen.jkvending.com/help/home?username=&password=
+http://testopen.jkvending.com/Help 接口列表
+http://testopen.jkvending.com/Help/Api/GET-api-device-pushDeviceLog_serial_signal_tel_temperature_domin
+刷设备在线
 
 尤米优库项目(这个是为客户开发的系统)
 超级管理员系统后台(我方使用):http://ymadmin.jkvending.com/
