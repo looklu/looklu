@@ -1,4 +1,21 @@
-# CSS_notes
+# Html-Css_notes
+
+## Browser
+
+1. shell: 外壳
+2. core: 内核(JS执行引擎,渲染引擎)
+
+IE: Trident
+Firefox: Gecko
+Chrome: Webkit / Blink
+Safari: Webkit
+Opera: Presto / Blink
+
+## Html_notes
+
+**选择什么标签,取决于内容的含义,而不是显示出的效果**
+
+## CSS_notes
 
 光学三原色：红绿蓝(色彩三原色：红黄蓝)
 颜色代码：#f40

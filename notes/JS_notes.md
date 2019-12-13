@@ -13,7 +13,7 @@ browser:shell、内核
 基础操作符、语句、变量和作用域
 
 1. ECMAScript (欧洲计算机制造协会) 描述了js的语法和基本对象
-1. DOM-->Documen tObject Model(文档对象模型) 处理网页内容的方法和接口为文档提供了结构化表示,并定义了如何通过脚本来访问文档结构.目的是为了能让js操作html元素而制定的一个规范.
+1. DOM-->Document Object Model(文档对象模型) 处理网页内容的方法和接口,为文档提供了结构化表示,并定义了如何通过脚本来访问文档结构.目的是为了能让js操作html元素而制定的一个规范.
 1. BOM 浏览器对象模型 与浏览器交互的方法和接口
 
 parseInt()、parseFloat()、inNaN()、isFinite()(确定数值是否超过规定范围)
