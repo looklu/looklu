@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>svg</title>
+    <style>
+        img,embed,object,.bg,.bgqq{
+            width: 100px;
+            height: 100px;
+            margin: 50px;
+        }
+        .bg{
+            background: url("svg.svg") no-repeat center/cover;
+        }
+        .bgqq{
+            background: url("qq.svg") no-repeat center/cover;
+        }
+    </style>
+</head>
+<body>
+    <img src="svg.svg" alt="认识svg">
+    <embed src="svg.svg" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/" />
+    <object data="svg.svg" type="image/svg+xml" codebase="http://www.adobe.com/svg/viewer/install/"></object>
+    <div class="bg"></div>
+
+    <img src="qq.svg" alt="认识svg">
+    <embed src="qq.svg" type="image/svg+xml">
+    <object data="qq.svg" type="image/svg+xml"></object>
+    <div class="bgqq"></div>
+</body>
+</html>

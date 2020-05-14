@@ -1,6 +1,6 @@
 # JS基础
 
-browser:shell、内核
+browser:shell、内核(渲染引擎,JS引擎,其他模块)
 
 1. IE —— trident
 1. Firefox —— Gecko

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .box{background-color: red;width: 200px;height: 200px;margin: 200px;position: relative;}
+        .box img{width: 100%;height: 100%;}
+        .box_text{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .box:hover img{opacity: 0.4;}
+        .box .box_text{opacity: 0;}
+        .box:hover .box_text{opacity: 1;}
+    </style>
+</head>
+<body>
+    <div class="box">
+        <img src="http://img.htmleaf.com/2001/202001155487.jpg" alt="">
+        <div class="box_text">
+            <p>图片上的文字</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="imagerBox">
+        <h3>img元素</h3>
+        <figure>
+            <a href="https://baike.baidu.com/item/%E5%A4%AA%E9%98%B3%E7%B3%BB/173281?fr=aladdin" title="点击查看太阳系详细信息">
+                <img usemap="#solarMap" src="resource/map.jpg" alt="太阳系">
+            </a>
+            <figcaption>
+                <h4>太阳系</h4>
+            </figcaption>
+            <!-- 与figure关联起来,figure找到的第一个figcaption元素显示为图片的标题 -->
+            <p>太阳系是以太阳为中心，和所有受到太阳的引力约束天体的集合体。包括八大行星（由离太阳从近到远的顺序：水星、金星、地球、火星、木星、土星、天王星、海王星）、以及至少173颗已知的卫星、5颗已经辨认出来的矮行星，包括四个柯伊伯带天体，和数以亿计的太阳系小天体,和彗星。</p>
+            <map name="solarMap">
+                <area shape="circle" coords="113,133,9" href="https://baike.baidu.com/item/水星/135917?fr=aladdin" alt="" title="点击查看水星详细信息">
+                <area shape="circle" coords="138,133,12" href="https://baike.baidu.com/item/金星/19410#viewPageContent" alt="" title="点击查看金星详细信息">
+                <area shape="circle" coords="166,141,14" href="https://baike.baidu.com/item/地球/6431?fr=aladdin" alt="" title="点击查看地球详细信息">
+                <area shape="circle" coords="206,143,13" href="https://baike.baidu.com/item/火星/5627" alt="" title="点击查看火星详细信息">
+                <!-- <area shape="" coords="" href="" alt="" title="点击查看火星详细信息">
+                <area shape="" coords="" href="" alt="" title="点击查看火星详细信息">
+                <area shape="" coords="" href="" alt="" title="点击查看火星详细信息"> -->
+                <!--
+                    以图片左上为原点 
+                    矩形rect 左上点,右下点坐标
+                    圆形circle 圆心,半径
+                    多边形poly 各个点依次输入
+                -->
+            </map>
+        </figure>
+    </div>
+    <div class="videoAudioBox">
+        <h3>video、audio元素</h3>
+        <video controls autoplay muted loop>
+            <source src="resource/test.MP4">
+            <source src="resource/test.webm">
+            <p>
+                对不起,您的浏览器不支持video元素,请点击 <a href="http://www.baidu.com" title="下载">下载</a> 最新版本的浏览器
+            </p>
+        </video>
+        <p>audio元素与video元素用法相同,其中audio支持mp3格式文件,video支持mp4、webm格式</p>
+        <pre>
+            布尔属性: 某些属性,只有两种状态:1.不写,2.取值为属性名;布尔属性在H5中可以不用书写属性.
+            controls: 布尔属性,控制控件的显示.
+            autoplay: 布尔属性,自动播放.
+            muted: 布尔属性,静音播放.
+            loop: 布尔属性,循环播放.
+        </pre>
+    </div>
+    <div class="olBox">
+        <h3>ol、ul和dl</h3>
+        <ol>
+            <li>ol: ordered list 有序列表</li>
+            <li>ul: unordered list 无序列表</li>
+            <li>li: list item</li>
+        </ol>
+        <dl>
+            <dt>定义列表</dt>
+            <dd>通常用于一些术语的定义</dd>
+            <dd>dl: definition list</dd>
+            <dd>dt: definition title</dd>
+            <dd>dd: definition description</dd>
+        </dl>
+    </div>
+    <div class="containerBox">
+        <h3>容器元素</h3>
+        <p>语义化元素便于搜索引擎的识别与后续开发,div元素无任何语义</p>
+        <p>元素的包含关系由元素的<b>内容类别</b>决定</p>
+        <pre>
+            header: 通常用于表示页头,也可以用于表示文章的头部.
+            footer: 通常用于表示页脚,也可以用于表示文章的尾部.
+            article: 通常用于表示整篇文章.
+            section: 通常用于表示文章的章节.
+            aside: 通常用于表示侧边栏.
+            nav: 通常用于表示导航栏.
+        </pre>
+    </div>
+    <!-- ul>li*5>lorem3 -->
+
+</body>
+</html>
