@@ -1,4 +1,4 @@
-# JS基础
+# JS笔记
 
 browser:shell、内核(渲染引擎,JS引擎,其他模块)
 
