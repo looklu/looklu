@@ -1,4 +1,4 @@
-# JS笔记
+# JS基础
 
 browser:shell、内核
 
