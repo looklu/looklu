@@ -1,6 +1,6 @@
 # JS笔记
 
-browser:shell、内核(渲染引擎,JS引擎,其他模块)
+browser:shell、内核
 
 1. IE —— trident
 1. Firefox —— Gecko
