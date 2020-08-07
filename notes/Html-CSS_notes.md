@@ -1,33 +1,14 @@
-# Html-Css_notes
+# CSS_notes
 
-## Browser
-
-1. shell: 外壳
-2. core: 内核(JS执行引擎,渲染引擎,其他模块)
-
-IE: Trident
-Firefox: Gecko
-Chrome: Webkit / Blink
-Safari: Webkit
-Opera: Presto / Blink
-
-## Html_notes
-
-选择什么标签,取决于内容的含义,而不是显示出的效果
-
-## CSS_notes
-
+全局样式（基本样式）base.css或global.css
+css字符编码 `@charset "UTF-8"`
 光学三原色：红绿蓝(色彩三原色：红黄蓝)
-颜色代码：#f40
-r       g       b
-00-ff   00-ff   00-ff
+颜色代码：#f40 00-ff	00-ff	00-ff
 颜色函数  rgb(0-255,0-255,0-255,0-1)
 
 margin塌陷(父子)，margin合并(同级)：垂直方向上的margin，以最大值为准
 
-*bfc(block format content)*
-如何触发一个盒子的bfc：
-
+如何触发一个盒子的bfc(block format content)：
 1. position：absolute；
 2. display：inline-block；
 3. float：left/hidden；
@@ -39,21 +20,18 @@ float：浮动元素产生了浮动流。
 设置了position：absolute；float：left/right；在内部把元素转换成inline-block;
 
 clear float
-
 1. 设置父级样式{overflow:auto} hidden也可以 ，就visible不行
 2. 在浮动元素后面添加元素，样式设置为{clear:both; height: 0; line-height: 0;font-size:0}
 3. 清除浮动（最好的清除浮动方式）--闭合浮动.clearfix:before,.clearfix:after{content:"";display: table;}.clearfix:after{clear:both;}
 浮动盒子根据内容确定大小（自动撑开），不用设置宽度
 
-文字溢出处理
-
-1. 单行文本:
-    white-space:nowrap;（超出文本不换行）
-    overflow：hidden；（超出文本隐藏）
-    text-overflow:ellipsis;（超出文本展示方式）
-
+*文字溢出处理*
+1. 单行文本：
+	white-space:nowrap;（超出文本不换行）
+	overflow：hidden；（超出文本隐藏）
+	text-overflow:ellipsis;（超出文本展示方式）
 2. 多行文本：
-一般多行文本不作打点，只做截断，整数行展示。
+	一般多行文本不作打点，只做截断，整数行展示。
 
 *图片代替文字*
 企业开发中，必须是图片的，使用img；可以替换的，使用background-image
@@ -74,26 +52,23 @@ overflow：hidden；
 vertical-align：10px；文字对齐位置改变
 
 文字垂直居中
-
 1. line-height=height;
-2. 内容等于高度，加padding;
+2. 内容等于高度，加padding，
 
 font-size设置的是字体的高。
 
-全局样式（基本样式）base.css|global.css
-css初始化前最好加上 @charset "UTF-8" 保证字符编码
-input外部背景框轮廓去除 input{outline-style：none;}
-文本域防止拖动 textarea{rasize:none}
+input外部阴影轮廓去除 input{outline-style：none;}
+文本域改变大小 textarea{resize:none}
 去掉图片底侧默认的3像素空白 img{vertical-align:middle} || display：block;
 表格合并边框 table{border-collapse:collapse;}
 
-让你的内容可编辑，只需要加一个contenteditable属性 
-placeholder = ""文本框的输入提示
+使内容可编辑，只需要加一个contenteditable属性 
+placeholder = "文本框的文字提示"
 autofocus给文本框、选择框或者按钮加上该属性，当打开该页面时，该控件自动获取光标焦点，一个页面只有一个。
 
-引进网站图标 link rel="shortcut icon" href="url-favicon.ico"
+引进网站图标`<link rel="shortcut icon" href="url-favicon.ico">`
 
-定位position：（盒子：子绝父相）
+定位position（子绝父相）：
 static：静态定位
 absolute:绝对定位（清除文本流）
 relative：相对定位
@@ -161,18 +136,15 @@ form
 
 onfocus 鼠标聚焦 onblur 失去焦点
 
-选择器权重(值相当于四位数XXXX)
+选择器
     ！important————Infinity
-    行内样式————1000(千位)
-    id————100(百位)
-    class|属性[属性名]|伪类————10(十位)
-    标签|伪元素————1(个位)
+    行内样式————1000
+    id————100
+    class|属性[属性名]|伪类————10
+    标签|伪元素————1
     通配符————0
 
 权重之间是进位，比如1和0之间，满256进1位。
-权重相同时,最后面声明的代码生效;
-作者样式>浏览器默认样式;
-a标签书写次序: link>visited>hover>active
 
 父子选择器|派生选择器
 并列选择器
@@ -187,35 +159,32 @@ offsetTop
 **video全屏处理**
 只需在video标签加个webkit-playsinline属性即可,这个属性基本上在基于webkit内核的移动端都是没问题的.这里的全屏是浏览器视窗内的全屏,并不是整个手机屏幕,当然我们做web前端需要的就是在document的body内的视窗范围的全屏.
 
-        <video src="" webkit-playsinline="true"></video>
-
+    <video src="" webkit-playsinline="true"></video>
+	
 direction: ltr;(表示从左往右的流-默认)
 direction: rtr;(表示从右往左的流)
-
+	
 改变 CSS 世界纵横规则的 writing-mode
 writing-mode 属性定义了文本水平或垂直排布以及在块级元素中文本的行进方向。
 writing-mode: horizontal-tb;    /* 默认值 文本流是水平方向(horizontal)的，元素是从上往下(tb:top-bottom)堆叠的*/
 writing-mode: vertical-rl;      /* 表示文本是垂直方向(vertical)展示，然后阅读的顺序是从右往左(rl:right-left)，跟我们古诗的阅读顺序一致*/
-writing-mode: vertical-lr;      /*表示文本是垂直方向(vertical)展示，然后阅读的顺序还是默认的从左往右(lr:left-right)，也就是仅仅是水平变垂直*/
+writing-mode: vertical-lr;      /*表示文本是垂直方向(vertical)展示，然后阅读的顺序还是默认的从左往右(lr:left-right)，也就是仅仅是水平变垂直*/ 
 
 transition: all 0.6s;表示所有的属性变化在0.6s的时间段内完成。
 transform: scale(1.4);表示在鼠标放到图片上的时候图片按比例放大1.4倍。
 
 清除屏幕下方白条
-
-        body{overflow-x: hidden;overflow-y: auto;}
-
+	body{
+			overflow-x: hidden;
+			overflow-y: auto;
+		}
 背景色渐变
 background: linear-gradient(to bottom,#000000 0%,#5788fe 100%);
 
 html编码声明
-
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 js编码声明(默认是gbk编码)
-
-        <script type="text/javascript" charset="utf-8" src=""></script>
-
+<script type="text/javascript" charset="utf-8" src=""></script>
 css编码声明 写在css文件中
 @charset "utf-8";(必须在文档第一行,双引号此属性才生效)
 
@@ -242,5 +211,7 @@ input[type="number"]{-moz-appearance:textfield;}
 calac 和flexbox搭配，用来写流式布局非常好；
 calc可以做用于任何具有大小的东东，比如border、margin、pading、font-size和width等属性设置动态值;支持的运算单位：rem , em , percentage , px;计算优先级别和数学一致
 
+
 超出隐藏
 overflow: hidden;text-overflow: ellipsis;white-space: normal;word-break: keep-all;
+

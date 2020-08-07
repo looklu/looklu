@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- <script type="text/javascript" src="jquery.js"></script> -->
+    <script type="text/javascript" src="tools.js"></script>
+</head>
+
+<body>
+    <div>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+    </div>
+    <script>
+        var box = document.getElementsByTagName("div")[0];
+        var spans = document.querySelectorAll("div > span");
+        var nspan = document.createElement("span");
+        nspan.innerText = 5;
+        box.appendChild(nspan);
+
+        // function setUserName(){
+        //     var myName = prompt('Please enter your name.');
+        //     localStorage.setItem('name',myName);
+        //     var nh = document.createElement("h1");
+        //     nh.textContent = "Mozilla is cool, " + myName;
+        //     box.insertBefore(nh,box.children[0]);
+        // }
+        // setUserName();
+    </script>
+    <!-- <script>
+        //字符串切割为数组
+        function StringToArray(str, substr) {
+            var arrTmp = new Array();
+            if (substr == "") {
+                arrTmp.push(str);
+                return arrTmp;
+            }
+            var i = 0, j = 0, k = str.length;
+            while (i < k) {
+                j = str.indexOf(substr, i);
+                if (j != -1) {
+                    if (str.substring(i, j) != "") {
+                        arrTmp.push(str.substring(i, j));
+                    }
+                    i = j + 1;
+                }
+                else {
+                    if (str.substring(i, k) != "") {
+                        arrTmp.push(str.substring(i, k));
+                    }
+                    i = k;
+                }
+            }
+            return arrTmp;
+        }
+        var Str = "abc-mng-zhang-mayi";
+        console.log(StringToArray(Str, "-"));
+        console.log(StringToArray(Str, "-").length);
+
+    </script> -->
+</body>
+</html>

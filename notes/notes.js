@@ -14,4 +14,3 @@ function parseQueryString(data){
     return obj;
 }
 
-
