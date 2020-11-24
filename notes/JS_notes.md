@@ -1,12 +1,26 @@
-# JS基础
+# JS_notes
 
-browser:shell、内核
+>凡事都要脚踏实地去作，不驰于空想，不骛于虚声，而惟以求真的态度作踏实的工夫。以此态度求学，则真理可明，以此态度作事，则功业可就。--李大钊
 
-1. IE —— trident
-1. Firefox —— Gecko
-1. Google chrome —— webkit/blink
-1. Safari —— webkit
-1. Opera —— presto
+## BROWSER
+
+browser的组成分为：
+1. shell: 外壳
+2. core: 内核--渲染引擎(内核一般主要指它)、JS引擎、其他模块
+最开始渲染引擎和 JS 引擎并没有区分的很明确，后来 JS 引擎越来越独立，内核就倾向于只指渲染引擎.
+
+市面上几款拥有自己内核的浏览器及内核：
+1.  IE —— trident(又叫MSHTML,新的Edge内核是EdgeHTML)
+2.  Firefox —— gecko
+3.  Google chrome —— blink(2013前webkit)
+4.  Safari —— webkit
+5.  Opera —— presto(2013前,后转入blink)
+
+几个主要的JS引擎与对应的内核：
+1. V8(C++) —— link —— Chrome
+2. SpiderMonkey(C写成,后改进为C++) —— gecko —— Firefox
+3. JavaScriptCore —— webkit —— Safari
+4. Chakra —— EdgeHTML —— Edge
 
 ## ECMAScript
 
@@ -15,6 +29,27 @@ browser:shell、内核
 1. ECMAScript (欧洲计算机制造协会) 描述了js的语法和基本对象
 1. DOM-->Documen tObject Model(文档对象模型) 处理网页内容的方法和接口为文档提供了结构化表示,并定义了如何通过脚本来访问文档结构.目的是为了能让js操作html元素而制定的一个规范.
 1. BOM 浏览器对象模型 与浏览器交互的方法和接口
+
+### 运算符
+
+```
+运算符：
+    1. 算术运算符 + - * / % ++ --
+    2. 赋值运算符 = += -= *= /= %=
+    3. 比较运算符 > >= < <= == === != !==
+    4. 逻辑运算符 && || !
+    5. 条件运算符 ?:
+    6. 字符串运算符 +
+    7. 位运算符 | & << >> ~ ^
+```
+运算符优先级：
+1. 括号()[]
+2. 求反 负数(-x) 求反(!x)
+3. 自加、自减 x++(x值加1,返回原来的x值) ++x(x值加1,返回后来的x值)
+4. 乘除
+5. 加减
+6. 比较
+7. 赋值
 
 parseInt()、parseFloat()、inNaN()、isFinite()(确定数值是否超过规定范围)
 encodeURI()、encodeURIComponent() //地址编码,encodeURI()不会对本身属于URI的特殊字符进行编码
