@@ -7,14 +7,14 @@
 browser的组成分为：
 1. shell: 外壳
 2. core: 内核--渲染引擎(内核一般主要指它)、JS引擎、其他模块
-最开始渲染引擎和 JS 引擎并没有区分的很明确，后来 JS 引擎越来越独立，内核就倾向于只指渲染引擎.
+最开始渲染引擎和 JS 引擎并没有区分的很明确，后来 JS 引擎越来越独立，内核就倾向于单指渲染引擎.
 
 市面上几款拥有自己内核的浏览器及内核：
 1.  IE —— trident(又叫MSHTML,新的Edge内核是EdgeHTML)
 2.  Firefox —— gecko
 3.  Google chrome —— blink(2013前webkit)
 4.  Safari —— webkit
-5.  Opera —— presto(2013前,后转入blink)
+5.  Opera —— 2013前presto,后转入blink
 
 几个主要的JS引擎与对应的内核：
 1. V8(C++) —— link —— Chrome
@@ -27,7 +27,7 @@ browser的组成分为：
 基础操作符、语句、变量和作用域
 
 1. ECMAScript (欧洲计算机制造协会) 描述了js的语法和基本对象
-1. DOM-->Documen tObject Model(文档对象模型) 处理网页内容的方法和接口为文档提供了结构化表示,并定义了如何通过脚本来访问文档结构.目的是为了能让js操作html元素而制定的一个规范.
+1. DOM Document Object Model(文档对象模型) 处理网页内容的方法和接口为文档提供了结构化表示,并定义了如何通过脚本来访问文档结构.目的是为了能让js操作html元素而制定的一个规范.
 1. BOM 浏览器对象模型 与浏览器交互的方法和接口
 
 ### 运算符
@@ -44,27 +44,24 @@ browser的组成分为：
 ```
 运算符优先级：
 1. 括号()[]
-2. 求反 负数(-x) 求反(!x)
+2. 负数(-x) 求反(!x)
 3. 自加、自减 x++(x值加1,返回原来的x值) ++x(x值加1,返回后来的x值)
 4. 乘除
 5. 加减
 6. 比较
-7. 赋值
+7. 逻辑运算与或 之后是 条件运算符
+8. 赋值
+9. 逗号最小
 
 parseInt()、parseFloat()、inNaN()、isFinite()(确定数值是否超过规定范围)
 encodeURI()、encodeURIComponent() //地址编码,encodeURI()不会对本身属于URI的特殊字符进行编码
 decodeURI()、decodeURIComponent() //地址解码
 
-立即执行函数:针对初始化功能的函数
-    //当函数作为表达式时,会立即执行,()可以使内容转换为表达式
-    //只有表达式才能被执行符号执行;被执行符号执行后,函数名即被永久放弃
-    (function(){
-        console.log("Hello");
-    })();
-    !function(){}() || (function(){}()) //使用!、+、-等符号
-    (function(text){
-        console.log(text);
-    })("Hello") //传递参数
+立即执行函数:针对初始化功能的函数；当函数作为表达式时,会立即执行,()可以使内容转换为表达式；只有表达式才能被执行符号执行;被执行符号执行后,函数名即被永久放弃。
+````
+(function(){ console.log("Hello"); })('传递参数');
+!function(){}() || (function(){}()) //使用!、+、- 非正负
+````
 
 js中的内置功能:
 var val = prompt("请输入") 获取用户输入的内容
@@ -77,22 +74,13 @@ window.prompt('') 用户输入
 
 变量的声明;使用驼峰命名法或者下划线法,开头不能是数字,名称中可以包含汉字但不能包含中文符号
 
-事件三要素:事件源 事件 事件处理程序
-事件源:触发的对象
-事件:触发的条件(一般是鼠标经过,键盘,点击)
-事件处理程序:要执行的程序
-事件源.事件= function() { 事件处理函数 }
-
 入口函数:页面加载完毕后,执行函数内的代码
-window.onload = function(){
-    内部放js
-}
-a href="javascript:;">超链接不跳转
-a href="javascript:void(0);">超链接不跳转
+window.onload = function(){内部放js}
+"javascript:;" "javascript:void(0);" 超链接不跳转
 
 在逻辑或和逻辑与中,返回值不一定是布尔值;
 如:var myObject = preferredObject || backupObject;
-变量preferredObject优先赋给变量myObject, 变量backupObject在preferredObject中不包含有效值的情况下提供后备值.
+变量preferredObject优先赋给变量myObject, 变量backupObject在preferredObject中不包含有效值的情况下提供后备值
 
 **预编译前奏**执行前生效
 
@@ -100,12 +88,13 @@ a href="javascript:void(0);">超链接不跳转
 1. 一切声明的全局变量,全是window的属性;
 
 **预编译**
-预编译发生在函数执行的前一刻:
+预编译发生在函数执行前一刻:
 
 1. 创建AO对象(Activation Object --执行期上下文)
 1. 找形参和变量声明,将变量和形参名作为AO的属性名,值为undefined;
 1. 将实参值和形参统一;
 1. 在函数体里面找函数声明,将函数名作为AO的属性名,属性值被赋予为声明的函数体;
+````
     console.log(test); //输出 全局test函数体
     function test(test){
         console.log(test); //输出 局部test函数体
@@ -115,6 +104,29 @@ a href="javascript:void(0);">超链接不跳转
     }
     test(1);
     var test =456;
+````
+
+函数中argumens用来储存传入函数的实参，相对应的形参和实参是分别独立的个体，但是存在相互映射关系；但，当个别实参没传入，后创建的形参变量与实参之间不存在映射关系。如下：
+````
+function sum(a,b,c){
+    a=2;
+    console.log(a);//2
+    console.log(arguments[0]);//2
+    arguments[0]=3;
+    console.log(a);//2
+    console.log(arguments[0]);//2
+}
+sum(1,2);
+
+function sum1(a,b,c){
+    b=2;
+    console.log(b);//2
+    console.log(arguments[1]);//undefined
+    arguments[1]=3;
+    console.log(b,arguments[1]);//2,3
+}
+sum1(1);
+````
 
 **构造函数内部原理**内部隐式运行
 
@@ -140,8 +152,15 @@ var iable = boolean_expression ? true_value : false_value;
 ### if语句
 
 语法: if (condition) statement1 else statement2
-其中的condition(条件)可以是任意表达式;而且对这个表达式求值的结果不一定是布尔值.ECMAScript会自动调用Boolean()转换函数将这个表达式的结果转换为一个布尔值,如果对condition求值结果是true,则执行statement1(语句1),如果对condition求值的结果是false.则执行statement2(语句2).
+其中的condition(条件)可以是任意表达式;而且对这个表达式求值的结果不一定是布尔值.ECMAScript会自动调用Boolean()转换函数将这个表达式的结果转换为一个布尔值,如果对condition求值结果是true,则执行statement1(语句1),如果对condition求值的结果是false.则执行statement2(语句2)。
 
+````
+if（function f(){console.log('this is f');}){
+    console.log('this is if');
+    f(); //Uncaught ReferenceError: f is not defined at
+    //括号这的表达式执行完之后就会销毁
+}
+````
 ### do-while语句("直到"型循环)
 
 do-while语句是一种后测试循环语句,即只在循环体中的代码执行之后,才会测试出口条件.在对条件表达式求值之前,至少被执行一次
@@ -158,7 +177,7 @@ while语句属于前测试循环语句,在循环体内的代码被执行之前,�
 
 ### for语句
 
-for语句也是一直前测试循环语句, 但它具有在执行循环之前初始化变量和定义循环后要执行的代码的能力.(在循环中定义的初始化变量在外部可以访问到)
+for语句也是前测试循环语句, 但它具有在执行循环之前初始化变量和定义循环后要执行的代码的能力.(在循环中定义的初始化变量在外部可以访问到)
 语法: for (initialization; expression; post-loop-expression){
     statement
 }
@@ -193,22 +212,24 @@ break和continue语句用于在循环中精确的控制代码的执行.其中bre
 
 使用label语句可以在代码中添加标签,以便将来使用.
 语法: label: statement
-如: begin: for (var i = 0; i < 10 ; i++ ){
-     alert(i);
-   }
+````
+begin: for (var i = 0; i < 10 ; i++ ){
+    alert(i);
+}
+````
 
 #### Label 的应用:(未添加 Label)
-
+````
     var num = 0;
     for (var i = 0 ; i < 10 ; i++){
-    for (var j = 0 ; j < 10 ; j++){
-        if( i == 5 && j == 5 ){
-        break;
-        }
-    num++;
+        for (var j = 0 ; j < 10 ; j++){
+            if( i == 5 && j == 5 ){
+                break;
+            }
+            num++;
         }
     }
-    alert(num);
+    console.log(num);
     //循环在 i 为5, j 为5的时候跳出 j 循环,但会继续执行 i 循环,输出 95
     var num = 0;
     for (var i = 0 ; i < 10 ; i++){
@@ -219,35 +240,36 @@ break和continue语句用于在循环中精确的控制代码的执行.其中bre
     num++;
         }
     }
-    alert(num);
+    console.log(num);
     //循环在 j 为5时,跳过 j 为5的循环,但后面的循环继续,输出99
-
+````
 #### 对比使用了 Label 之后的程序:(添加 Label 后)
-
+````
     var num = 0;
     outPoint:
     for (var i = 0 ; i < 10 ; i++){
-    for (var j = 0 ; j < 10 ; j++){
-    if( i == 5 && j == 5 ){
-        break outPoint;
-        }
-        num++;
+        for (var j = 0 ; j < 10 ; j++){
+            if( i == 5 && j == 5 ){
+                break outPoint;
+            }
+            num++;
         }
     }
-    alert(num);
+    console.log(num);
     //循环在 i 为5, j 为5的时候跳出双循环,返回到outPoint层继续执行,输出 55
     var num = 0;
     outPoint:
     for (var i = 0 ; i < 10 ; i++){
-    for (var j = 0 ; j < 10 ; j++){
-        if( i == 5 && j == 5 ){
-        continue outPoint;
-        }
-    num++;
+        for (var j = 0 ; j < 10 ; j++){
+            if( i == 5 && j == 5 ){
+                continue outPoint;
+            }
+            num++;
         }
     }
-    alert(num);
+    console.log(num);
     //循环在 j 为5时,跳过双循环,但后面的循环继续,输出95
+````
 
 ### with语句
 
@@ -334,15 +356,12 @@ object:创建Object实例的方式有两种:
     var propertyName = "name";
     alert(person[propertyName]);
 
-如果属性命中包含会导致语法错误的字符,或者属性名使用的是关键字或保留字,也可以使用方括号表示法
+如果属性命中包含会导致语法错误的字符或者属性名使用的是关键字或保留字,也可以使用方括号表示法
     person["first name"] = "Nicholas";
 
 所有对象都具有toLocaleString()、toString()和valueOf()方法.
 
-属性增删(delete)改查
-
 **类数组**特殊对象
-
 1. 属性要为索引(数字)属性,必须有length属性,最好加上push
 1. 具有数组和对象的特性
 
@@ -367,16 +386,18 @@ push方法的原理:
 #### Array
 
 创建Array有两种方法,构造函数法和字面量表示法:
-    var colors1 = new Array();
-    var colors2 = Array();
-    var colors3 = ["blue","red",3,"green"];
-
+````
+var colors1 = new Array();
+var colors2 = Array();
+var colors3 = ["blue","red",3,"green"];
+````
 ECMAScript5新增的Array.isArray()方法可以确定某个值到底是不是数组,而不管它是哪个全局环境创建的.
+````
 expression:
-        if (Array.isArray(value)){
-                //对数组执行的操作
-        }
-
+if (Array.isArray(value)){
+    //对数组执行的操作
+}
+````
 Array调用valueOf()返回的是Array,调用toString()返回的是Array中每个值的字符串拼接而成的一个以逗号分隔的字符串.调用toString()或者toLocaleString()其实是调用数组每一项的toString()或者toLocaleString().
 
 push()从数组的末尾位置添加任意个项并返回新数组长度.
@@ -384,45 +405,84 @@ pop()移除数组的最后一项并返回该项.
 unshift()在数组首位置添加任意个项并返回新数组长度.
 shift()移除数组中的第一项并返回该项.
 
-concat()连接数组,返回新数组副本
+concat()基于当前数组创建新数组，将传入参数的每一项添加至新数组末尾,返回新数组副本
 split()将字符串分割成数组
 join()数组每项用符号连接成的一个字符串
-slice()返回数组切片
+slice(start,end)返回数组切片
 splice(start,amount,newdata)替换项,返回删除项组成的数组
 reverse()反转原来的数组,返回该数组,但不会创建新的数组
 sort()可以接收一个比较函数,返回操作后的数组
 sort(function(a,b){return a-b;}),返回值为负数或0时,位置不变;为正数,后面的数在前
 
-indexOf(),lastIndexOf()都可以接收两个参数,第一个是检索项,第二个是起点位置的索引,最后都返回查找项所在的位置索引.
+indexOf(),lastIndexOf()都可以接收两个参数,第一个是检索项,第二个是起点位置的索引,最后都返回查找项所在的位置索引，无匹配项返回-1，第一个参数与项比较时使用的是全等操作符（===）；
 
 join(),Array继承的toLocaleString()、toString()、valueOf(),在默认情况下是以逗号分隔.而使用join(),则可以使用不同的分隔符来构建这个字符串.join()只接收一个参数,即用作分隔符的字符串,然后返回包含所有数组项的字符串.
 
-instance:
-    var colors = ["red","blue","green"];
-    console.log(colors.join("||"));  //red||blue||green
-    console.log(typeof colors.join("||"));  //string
-
 *栈方法*
-栈是一种LIFO(Last-In-First-Out,后进先出)的数据结构,也就是最新添加的项最早被移除.而栈中项的插入(推入)和移除(弹出),只发生在一个位置--栈的顶部.Array中的push()和pop()实现了类似栈的行为.
-*队方法*
-队是一种FIFO(First-In-First-Out,后进后出)的数据结构,也就是最后添加的数据走后
+栈是一种LIFO(Last-In-First-Out,后进先出)的数据结构，也就是最新添加的项最早被移除，而栈中项的插入(推入)和移除(弹出)，只发生在一个位置--栈的顶部：push(),pop();
 
-*concat() array连接*
-concat()用于连接两个或多个数组,它不会改变现有的数组,而仅仅会返回被连接数组的一个副本.
+*队方法*
+队是一种FIFO(First-In-First-Out,先进先出)的数据结构：push(),shift();
 
 *split() 字符转换为数组*
-        stringObject.split(spearator(分隔的符号),howmany(获取的长度));
-        var texts = "ab-c-d-ef";
-        console.log(texts.split("-",2));//["ab","c"]
+````
+stringObject.split(spearator(分隔的符号),howmany(获取的长度));
+var texts = "ab-c-d-ef";
+console.log(texts.split("-",2));//["ab","c"]
+````
 
-slice(start,end)
-
-*splice() 替换*
-splice(a,b,c...) a要删除第一项位置,b删除的数量,b之后为插入的项
+*splice() 删除 插入 替换*
+````
+splice(a,b,c...) a要删除的第一项的位置,b删除的数量,b之后为插入的项
 splice()返回一个数组,数组由删除项组成,没有删除数时返回空数组
 splice(a,b)删除,splice(a,0,c...)插入,splice(a,b,c)替换
+````
 
-indexOf(),lastIndexOf()
+##### 迭代方法
+每个迭代方法可以传入两个参数：要在每一项上调用的函数和（可选的）调用该函数的作用域对象——影响this的值。
+函数中都传入三个参数：数组项的值value，当前项索引值index，数组对象本身array；
+every() 对数组的每一项调用给定函数，如果所有项的函数返回值都为true，则返回true；
+some() 对数组的每一项调用给定函数，当有一项的函数返回值为true时，则返回true；
+filter() 对数组的每一项调用给定函数，返回每次函数调用返回结果为true的项组成的数组；
+map() 对数组的每一项调用给定函数，返回每次函数调用返回结果组成的数组；
+forEach() 对数组的每一项调用给定函数，无返回值；
+
+##### 归并方法
+reduce(),reduceRight()
+这两个方法都会迭代数组的所有项，只是reduce()从头开始，reduceRight()从尾开始。这两个方法都会传入两个参数：对数组每一项调用的的函数和（可选的）作为归并基础的初始值。
+调用函数都传入四个参数：前一个值prev，当前值cur，项的索引index，数组对象本身array。函数返回的任何值会作为第一个参数传递给下一项。
+
+#### Date
+var date = new Date();//声明一个新的日期函数
+getTime(),valueOf()  返回1970年1月1日至今的毫秒数
+Date.now() 返回当前事件(同上)
+getMilliseconds() 返回Date对象的毫秒数(0~999)
+getSeconds() 返回Date对象的秒数(0~59)
+getMinutes() 返回Date对象的分钟数(0~59)
+getHours() 返回Date对象的小时数(0~23)
+getDate() 获取日 1-31
+getDaty() 获取星期 0-6
+getMonth() 获取月 0-11
+getFullYear() 获取四位数字年份
+Date.parse() 接收一个表示日期的字符串参数,然后尝试根据这个字符串返回相应的毫秒数
+Date.UTC() 同样返回表示日期的毫秒数
+
+toDateString() 以特定于实现的格式显示星期年月日 //Sat Oct 07 2017
+toTimeString() 以特定于实现的格式显示时分秒和时区 //23:25:36 GMT+0800(中国标准事件)
+toLocaleDateString() 以特定于地区的格式显示星期年月日 //2017/10/7
+toLocaleTimeString() 以特定于实现的格式显示时分秒 //下午11:28:09
+toUTCString 以特定于实现的格式完整的UTC日期 //Sat , 07 Oct 2017 15:31:08 GMT
+
+setInterval() 间歇调用 排队执行
+setTimeout() 超时调用 只执行一次
+clearTimeout() 取消超时调用
+<!-- 需要传参时 -->
+function hui(str){
+    alert(str);
+}
+setInterval(hui,3000,"你好");//只有这样写才正确
+如果改成:setInterval("hui",3000,"你好")//不起作用
+如果改成:setInterval("hui()",3000,"你好")//起作用,弹出undefined
 
 #### Function
 
@@ -492,39 +552,6 @@ split() 把字符串分割为数组 plit(spearator分隔的符号,howmany获取�
 match() 返回匹配的字符串 || search() 返回匹配字符串的索引值
 
 replace() 替换与正则表达式匹配的字符串
-
-#### Date
-
-var date = new Date();//声明一个新的日期函数
-getTime(),valueOf()  返回1970年1月1日至今的毫秒数
-Date.now() 返回当前事件(同上)
-getMilliseconds() 返回Date对象的毫秒数(0~999)
-getSeconds() 返回Date对象的秒数(0~59)
-getMinutes() 返回Date对象的分钟数(0~59)
-getHours() 返回Date对象的小时数(0~23)
-getDate() 获取日 1-31
-getDaty() 获取星期 0-6
-getMonth() 获取月 0-11
-getFullYear() 获取四位数字年份
-Date.parse() 接收一个表示日期的字符串参数,然后尝试根据这个字符串返回相应的毫秒数
-Date.UTC() 同样返回表示日期的毫秒数
-
-toDateString() 以特定于实现的格式显示星期年月日 //Sat Oct 07 2017
-toTimeString() 以特定于实现的格式显示时分秒和时区 //23:25:36 GMT+0800(中国标准事件)
-toLocaleDateString() 以特定于地区的格式显示星期年月日 //2017/10/7
-toLocaleTimeString() 以特定于实现的格式显示时分秒 //下午11:28:09
-toUTCString 以特定于实现的格式完整的UTC日期 //Sat , 07 Oct 2017 15:31:08 GMT
-
-setInterval() 间歇调用 排队执行
-setTimeout() 超时调用 只执行一次
-clearTimeout() 取消超时调用
-<!-- 需要传参时 -->
-function hui(str){
-    alert(str);
-}
-setInterval(hui,3000,"你好");//只有这样写才正确
-如果改成:setInterval("hui",3000,"你好")//不起作用
-如果改成:setInterval("hui()",3000,"你好")//起作用,弹出undefined
 
 #### Math
 
@@ -809,6 +836,12 @@ window.getComputedStyle(ele,null) //第二个参数可以写伪元素("after"),�
 改变元素的样式,改变前后相当于不同的状态,可以在css中提前写好样式,在js中通过更改className改变元素状态,进而改变样式
 
 ## 事件
+
+事件三要素:事件源 事件 事件处理程序
+事件源:触发的对象
+事件:触发的条件(一般是鼠标经过,键盘,点击)
+事件处理程序:要执行的程序
+事件源.事件= function() { 事件处理函数 }
 
 **绑定事件处理程序**绑定函数
 
