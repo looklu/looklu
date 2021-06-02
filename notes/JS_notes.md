@@ -91,9 +91,9 @@ window.onload = function(){内部放js}
 预编译发生在函数执行前一刻:
 
 1. 创建AO对象(Activation Object --执行期上下文)
-1. 找形参和变量声明,将变量和形参名作为AO的属性名,值为undefined;
-1. 将实参值和形参统一;
-1. 在函数体里面找函数声明,将函数名作为AO的属性名,属性值被赋予为声明的函数体;
+2. 找形参和变量声明,将变量和形参名作为AO的属性名,值为undefined;
+3. 将实参值和形参统一;
+4. 在函数体里面找函数声明,将函数名作为AO的属性名,属性值被赋予为声明的函数体;
 ````
     console.log(test); //输出 全局test函数体
     function test(test){
@@ -127,6 +127,23 @@ function sum1(a,b,c){
 }
 sum1(1);
 ````
+**闭包**：函数执行时会生成一个执行期上下文，执行完毕之后，销毁该函数的执行期上下文，而函数内部声明一个方法或对象后，并将之抛到函数之外（return或者留下调用），而子对象是可以访问到父级的执行期上下文，外部却访问不到函数内部属性，此种情况就是闭包。闭包利用的是函数的特殊性，在js中，函数是‘一等公民’，不属于任何谁谁谁，因此不论是在哪里，都可以直接调用函数。
+
+````
+var showT;
+function test(){
+    var tVal = 0;
+    function tAdd(){
+        tVal++;
+        console.log(tVal);
+    }
+    showT = tAdd;
+}
+test();
+showT();//1
+showT();//2
+console.log(tVal);//Uncaught ReferenceError: tVal is not defined
+````
 
 **构造函数内部原理**内部隐式运行
 
@@ -138,7 +155,7 @@ sum1(1);
 
 1. 函数预编译过程 this --> window
 1. 全局作用域 this --> window
-1. call/apply可以改变函数运行时this指向
+1. call/apply 改变函数运行时this指向，区别是传参方式不同；call是逐个传参，apply是数组传参；
 1. obj.func(); func()里面的this指向obj
 
 **逗号操作符**
@@ -335,7 +352,7 @@ JavaScript变量可以用来保存两种类型的值:基本类型值和引用类
 
 #### Object
 
-object:创建Object实例的方式有两种:
+object：创建Object实例的方式有两种:
 
 1. 使用new操作符后跟Object构造函数:
     var person = new Object();
@@ -412,9 +429,9 @@ slice(start,end)返回数组切片
 splice(start,amount,newdata)替换项,返回删除项组成的数组
 reverse()反转原来的数组,返回该数组,但不会创建新的数组
 sort()可以接收一个比较函数,返回操作后的数组
-sort(function(a,b){return a-b;}),返回值为负数或0时,位置不变;为正数,后面的数在前
+sort(function(a,b){return a-b;}),返回值为负数或0时,位置不变;为正数,两数交换位置；
 
-indexOf(),lastIndexOf()都可以接收两个参数,第一个是检索项,第二个是起点位置的索引,最后都返回查找项所在的位置索引，无匹配项返回-1，第一个参数与项比较时使用的是全等操作符（===）；
+indexOf(),lastIndexOf()都可以接收两个参数,第一个是检索项,第二个是起点位置的索引,最后都返回查找项所在的位置索引，无匹配项返回-1，第一个参数与各项比较时使用的是全等操作符（===）；
 
 join(),Array继承的toLocaleString()、toString()、valueOf(),在默认情况下是以逗号分隔.而使用join(),则可以使用不同的分隔符来构建这个字符串.join()只接收一个参数,即用作分隔符的字符串,然后返回包含所有数组项的字符串.
 
@@ -476,13 +493,17 @@ toUTCString 以特定于实现的格式完整的UTC日期 //Sat , 07 Oct 2017 15
 setInterval() 间歇调用 排队执行
 setTimeout() 超时调用 只执行一次
 clearTimeout() 取消超时调用
+
+````
 <!-- 需要传参时 -->
-function hui(str){
-    alert(str);
-}
+setInterval中每次调用函数，所传参数都是第一次时传入的参数，参数不是动态的；
+function hui(str){alert(str);}
+let handle = argu => console.log(argu);
 setInterval(hui,3000,"你好");//只有这样写才正确
-如果改成:setInterval("hui",3000,"你好")//不起作用
-如果改成:setInterval("hui()",3000,"你好")//起作用,弹出undefined
+
+setInterval("hui",3000,"你好")//不起作用
+setInterval("hui()",3000,"你好")//起作用,弹出undefined
+````
 
 #### Function
 
@@ -522,7 +543,7 @@ ECMAScript5还定义了另一个访问个别字符的方法.可以使用方括�
 
 concat() 用于将一或多个字符串拼接起来,返回拼接得到的新字符串.
 
-基于字符串创建新的字符串:slice()、substr()、substring()
+基于字符串创建新的字符串:slice()、substr()、substring()：
     var svalue = "hello world";
     alert(svalue. slice(3)); // "lo world"
     alert(svalue. substr(3)); // "lo world"
@@ -968,13 +989,16 @@ window.onload:页面加载结束后触发
 ### Json(静态类)
 
 JSON是一种传输数据的格式(以对象为样板,本质上就是对象,但用途有区别,对象就是本地用的,json是用来传输的)
-json中属性名必须加双引号
+JSON对值的类型和格式有严格规定：
+1. 复合类型的值只能是**数组或对象**，不能是函数、正则表达式对象、日期对象。
+2. 原始类型的值只有四种：字符串、数值（必须以十进制表示）、布尔值和null（不能使用NaN, Infinity, -Infinity和undefined）。
+3. 字符串必须使用双引号表示，不能使用单引号。
+4. 对象的键名必须放在双引号里面。
+5. 数组或对象最后一个成员的后面，不能加逗号。
+````
 JSON.parse();  string -> json
 JSON.stringify();  json -> string
-
-首先检索HTML代码,生成domTree(深度优先原则-->一条道走到黑);然后解析css代码,生成cssTree;
-DOMTree + cssTree = randerTree
-randerTree生成后才开始渲染页面
+````
 
 ### 异步加载JS
 

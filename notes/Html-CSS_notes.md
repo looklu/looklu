@@ -35,23 +35,25 @@ html实体用于显示保留字符、不可见字符和那些难以键入的字�
     常见块元素：div、form、table、ol、ul、pre、h1等
 2.  
     行内块元素inline-block
-    常见块元素：button、textarea、等
+    常见行内块元素：button、textarea等
 3.  
     行内元素inline
-    常见行元素：span、i、img、a、code、video、audio等;
+    常见行内元素：span、i、img、a、code、video、audio等;
 
 关于盒模型大小
 1. 盒子随内容延伸
 2. 行内元素不能设置宽高
-3. 调整行内元素的宽高,应该使用字体大小、行高、字体类型,间接调整;
+3. 调整行内元素的宽高，应该使用字体大小、行高、字体类型，间接调整;
 4. padding、border、margin：水平方向有效,垂直方向不会实际占据空间
 
-行内元素内部(行内块元素)和行内元素内部(行内块元素)之间会发生空白折叠,原因是计算机对空格(文字分隔符)的定义与日常对空格的定义不同;
+行内元素可以设置左右padding、margin，但是不能设置上下;
 
-大部分元素,页面上显示的结果,取决于元素内容,称为**非可替换元素**；少部分元素,页面上显示的结果,取决于元素属性,称为**可替换元素**。
-可替换元素: img、video、audio；绝大部分可替换元素为行内元素linline；可替换元素类似于行内块元素inline-block,盒模型中所有尺寸都有效，
+行内元素内部(行内块元素)和行内元素内部(行内块元素)之间会发生空白折叠，原因是计算机对空格(文字分隔符)的定义与日常对空格的定义不同;
 
-object-fit CSS属性指定可替换元素的内容应该如何适应到其使用的高度和宽度确定的框.scale-down:内容的尺寸与 none 或 contain 中的一个相同，取决于它们两个之间谁得到的对象尺寸会更小一些.
+大部分元素，页面上显示的结果，取决于元素内容,称为**非可替换元素**；少部分元素，页面上显示的结果，取决于元素属性，称为**可替换元素**。
+可替换元素: img、video、audio；绝大部分可替换元素为行内元素linline；可替换元素类似于行内块元素inline-block，盒模型中所有尺寸都有效，
+
+object-fit CSS属性指定可替换元素的内容应该如何适应到其使用的高度和宽度确定的框。scale-down:内容的尺寸与 none 或 contain 中的一个相同，取决于它们两个之间谁得到的对象尺寸会更小一些。
 
 a标签的一些作用
 1. 超链接
@@ -162,7 +164,7 @@ z-index(层级):只有定位的盒子(除了static)有z-index(浮动没有);都�
 html颜色代码：#f40(00-ff,00-ff,00-ff)
 颜色函数：rgb(0-255,0-255,0-255,0-1)
 
-margin塌陷、margin合并：
+#### margin塌陷、margin合并
 1. margin塌陷(父子margin重叠在一起),弥补方法是触发盒子的bfc(block format content),但无法完美解决,有着不同缺点：
     1. position：absolute；
     2. display：inline-block；
@@ -209,7 +211,7 @@ nav：dropdown、navitems、navright;
 
 盒子中的a,宽度会继承,只需设置高度即可;
 
-文字溢出处理：
+#### 文字溢出处理
 1. 单行文本,超出打点：
 	white-space:nowrap;（文本不换行）
 	overflow：hidden；（超出文本隐藏）
@@ -233,9 +235,7 @@ font，background 简写：
         CSS3不支持时可以使用滤镜;
         opacity:0.5，让盒子半透明，内容也半透明(opacity 属性的值，可以被其子元素继承);
 
-行内元素可以设置左右padding、margin，但是不能设置上下;
-
-盒子隐藏
+#### 盒子隐藏
 1. display:none;隐藏不占位置
 2. visibility:hidden;隐藏但是占有位置
 3. overflow:hidden;超出部分隐藏
@@ -244,8 +244,7 @@ pixelTop整形
 posTop浮点形
 offsetTop
 
-**video全屏处理**
-
+#### video全屏处理
 只需在video标签加个webkit-playsinline属性即可,这个属性基本上在基于webkit内核的移动端都是没问题的.这里的全屏是浏览器视窗内的全屏,并不是整个手机屏幕,当然web前端需要的就是在document的body内的视窗范围的全屏.
 `<video src="" webkit-playsinline="true"></video>`
 
@@ -287,8 +286,7 @@ input[type="number"]{-moz-appearance:textfield;}
 calac 和flexbox搭配，用来写流式布局非常好；
 calc可以做用于任何具有大小的东东，比如border、margin、pading、font-size和width等属性设置动态值;支持的运算单位：rem , em , percentage , px;计算优先级别和数学一致
 
-**@规则**
-
+#### @规则
 ```
 @charset    设置样式表编码
     @charset "utf-8";
@@ -297,7 +295,8 @@ calc可以做用于任何具有大小的东东，比如border、margin、pading�
 @meida  媒体查询
 @font-face  自定义字体
 ```
-**以图换字**
+
+#### 以图换字
 企业开发中，必须是图片的，使用img；可以替换的，使用background-image.
 当网速不行时，浏览器会屏蔽Css、JavaScript，在这种情况下要保证使用背景图片的超链接正常使用,比如网站首页图标。
 1. case1：使用首行缩进把文字顶出去，然后超出隐藏；
@@ -308,5 +307,9 @@ calc可以做用于任何具有大小的东东，比如border、margin、pading�
     height：0；
     padding-top：200px；
     overflow：hidden；
+
+有时会直接将图片等文件采用数据链接的方式写在页面上,优点是减少请求；
+数据链接：将目标文件的数据直接书写到路径位置
+语法：`data: MIME,数据`
 
 

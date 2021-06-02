@@ -1,3 +1,85 @@
+// 判断数据类型，可以区分基础类型数据与包装类数据
+function txtType(data){
+    if(data===null){
+        return 'null';
+    }
+    var dType = typeof data,rTxt = '',
+    objArr = {
+        '[object Aarray]': 'Array-object',
+        '[object object]': 'Object-object',
+        '[object Number]': 'Number-object',
+        '[object String]': 'String-object',
+        '[object Boolean]': 'Boolean-object'
+    };
+    if(dType == 'object'){
+        rTxt = objArr[Object.prototype.toString.call(data)];
+    }else{
+        rTxt = dType
+    }
+    return rTxt;
+}
+
+// 数据深度克隆,在js中引用类型数据的赋值和调用，使用的都是堆内存中的数据的位置指针；
+// 1 只能复制符合JSON数据格式要求的数据
+let copy = JSON.parse(JSON.stringify(target));
+// 2
+function dataClone(data,cloneObj){
+    if(!data){return 'The data is empty'}
+    //数据比较多就传入cloneObj，使用外部对象，避免形成闭包
+    var rObj = cloneObj||{},
+    dType  = typeof data;
+    if(dType == 'object'){
+        for(var p in data){
+            //消除原型链上的干扰数据，确保只复制data上的属性
+            if(!data.hasOwnProperty(p)){continue;}
+            rObj[p] = arguments.callee(data[p]);
+        }
+    }else if(dType == 'function'){
+        rObj = new Function('return '+data.toString())();
+    }else{
+        rObj = data;
+    }
+    return rObj;
+}
+// 克隆多种格式数据
+let specialObj = {
+	'[object Date]': date => new Date(date),
+	'[object Set]': setData => new Set(setData),
+	'[object Map]': mapData => new Map(mapData),
+	'[object Function]': func => func,
+	'[object Symbol]': symData => symData
+}
+let target = {
+	a: new Date(),
+	b: { b1: new Set([1, 3, 5]), b2: new Map(Object.entries({b21: 123, b22: 234}))},
+	c: Symbol('csymbol'),
+	d: () => { console.log('func from d')}
+}	
+let copy = {}
+function copyProperty (val, key, result) {
+	if (['function', 'object'].includes(typeof val)) {
+		result[key] = {}
+		let objType = Object.prototype.toString.call(val)
+		if (specialObj[objType]) {
+			result[key] = specialObj[objType](val)
+		}
+		Object.keys(val).forEach(childKey => {
+			copyProperty(val[childKey], childKey, result[key])
+		})
+	} else if (Array.isArray(val)) {
+		result[key] = []
+		val.forEach((item, index) => {
+			copyProperty(item, index, result[key])
+		})
+	} else {
+		result[key] = val
+	}
+}
+Object.keys(target).forEach(prop => {
+	copyProperty(target[prop], prop, copy)
+})
+console.log('result is : ', copy) // 得到需要的结果
+
 //获取窗口滚动条滚动距离
 function getScrollOffset(){
     if(window.pageXOffset){
@@ -180,6 +262,7 @@ function timeContrast(begin,end){
     }
     return true;
 }
+
 // 获取昨,今,明天时间
 function getDates(num,ico){
     var dates = new Date();
@@ -188,36 +271,6 @@ function getDates(num,ico){
     var str = dates.getFullYear() + ico + (month<10?'0'+month:month) + ico + (day<10?'0'+day:day);
     return str;
 }
-
-//点击 出现文字,上滑慢慢消失
-var a_idx = 0;  
-jQuery(document).ready(function($) {  
-    $("body").click(function(e) {  
-        var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正" ,"法治", "爱国", "敬业", "诚信", "友善");  
-        var $i = $("<span/>").text(a[a_idx]);  
-        a_idx = (a_idx + 1) % a.length;  
-        var x = e.pageX,  
-        y = e.pageY;  
-        $i.css({  
-            "z-index": 9999999999999999999999999999999999999999,  
-            "top": y - 20,  
-            "left": x,  
-            "position": "absolute",  
-            "font-weight": "bold",  
-            "color": "#ff6651"  
-        });  
-        $("body").append($i);  
-        $i.animate({  
-            "top": y - 180,  
-            "opacity": 0  
-        },  
-        1500,  
-        function() {  
-            $i.remove();  
-        });  
-    });
-}); 
-
 
 //获取日期 num天数(距今) Month,本月
 function getday(num) {
@@ -259,6 +312,17 @@ function IsURL(str_url) {
         return (false);
     }
 }
+
+function isURL(urlString) {
+    regExp = /^((https?|ftp|news):\/\/)?([a-z]([a-z0-9\-]*[\.。])+([a-z]{2}|aero|arpa|biz|com|coop|edu|gov|info|int|jobs|mil|museum|name|nato|net|org|pro|travel)|(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))(\/[a-z0-9_\-\.~]+)*(\/([a-z0-9_\-\.]*)(\?[a-z0-9+_\-\.%=&]*)?)?(#[a-z][a-z0-9_]*)?$/
+
+    if (urlString.match(regExp)){
+        return true;
+    }else{
+        return false;
+    }
+}
+
 function checkUrl(urlString) {
     if (urlString != "") {
         var reg = /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/;
@@ -270,18 +334,7 @@ function checkUrl(urlString) {
     }
 }
 
-function isURL(urlString) {
-    regExp = /^((https?|ftp|news):\/\/)?([a-z]([a-z0-9\-]*[\.。])+([a-z]{2}|aero|arpa|biz|com|coop|edu|gov|info|int|jobs|mil|museum|name|nato|net|org|pro|travel)|(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))(\/[a-z0-9_\-\.~]+)*(\/([a-z0-9_\-\.]*)(\?[a-z0-9+_\-\.%=&]*)?)?(#[a-z][a-z0-9_]*)?$/
-
-    if (urlString.match(regExp)){
-        return true;
-    }else{
-        return false;
-    }
-}
-/* 验证url正确性end */
-
-/* 鼠标特效 */
+// 鼠标点击出现文字,上滑慢慢消失
 var a_idx = 0;
 jQuery(document).ready(function($) {
     $("body").click(function(e) {
@@ -311,13 +364,13 @@ jQuery(document).ready(function($) {
     });
 });
 
-// onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();"
 // 只能输入数字
+// onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();"
 
 //使用array方法获取url参数
 var url = 'http://www.taobao.com/index.php?key0=0&key1=1&key2=2.....';
 var obj = parseQueryString(url);
-alert(obj.key0)  // 输出0
+console.log(obj.key0)  // 输出0
 function parseQueryString(data){
     var obj = {};
     var start = data.indexof('?') + 1;
@@ -328,5 +381,122 @@ function parseQueryString(data){
         obj[arr2[0]] = arr2[1];
     }
     return obj;
+}
+
+// 1.type判断类型
+//返回obj的数据类型,适用于所有的数据类型
+function istype (obj){
+    return Object.prototype.toString.call(obj).slice(8,-1);
+};
+
+function isFalse (o) {
+    if (!o || o === 'null' || o === 'undefined' || o === 'false' || o === 'NaN') return true
+        return false
+}
+
+function isTrue (o) {
+    return !this.isFalse(o)
+}
+
+function isIos () {
+    var u = navigator.userAgent;
+    if (u.indexOf('Android') > -1 || u.indexOf('Linux') > -1) {//安卓手机
+        // return "Android";
+        return false
+    } else if (u.indexOf('iPhone') > -1) {//苹果手机
+        // return "iPhone";
+        return true
+    } else if (u.indexOf('iPad') > -1) {//iPad
+        // return "iPad";
+        return false
+    } else if (u.indexOf('Windows Phone') > -1) {//winphone手机
+        // return "Windows Phone";
+        return false
+    }else{
+        return false
+    }
+}
+// 判断浏览器类型
+function isPC () { //是否为PC端
+    var userAgentInfo = navigator.userAgent;
+    var Agents = ["Android", "iPhone",
+                "SymbianOS", "Windows Phone",
+                "iPad", "iPod"];
+    var flag = true;
+    for (var v = 0; v < Agents.length; v++) {
+        if (userAgentInfo.indexOf(Agents[v]) > 0) {
+            flag = false;
+            break;
+        }
+    }
+    return flag;
+}
+// 判断浏览器
+function browserType(){
+    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+    var isOpera = userAgent.indexOf("Opera") > -1; //判断是否Opera浏览器
+    var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器
+    var isEdge = userAgent.indexOf("Edge") > -1; //判断是否IE的Edge浏览器
+    var isFF = userAgent.indexOf("Firefox") > -1; //判断是否Firefox浏览器
+    var isSafari = userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") == -1; //判断是否Safari浏览器
+    var isChrome = userAgent.indexOf("Chrome") > -1 && userAgent.indexOf("Safari") > -1; //判断Chrome浏览器
+    if (isIE) {
+        var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+        reIE.test(userAgent);
+        var fIEVersion = parseFloat(RegExp["$1"]);
+        if(fIEVersion == 7) return "IE7"
+        else if(fIEVersion == 8) return "IE8";
+        else if(fIEVersion == 9) return "IE9";
+        else if(fIEVersion == 10) return "IE10";
+        else if(fIEVersion == 11) return "IE11";
+        else return "IE7以下"//IE版本过低
+    }
+
+    if (isFF) return "FF";
+    if (isOpera) return "Opera";
+    if (isEdge) return "Edge";
+    if (isSafari) return "Safari";
+    if (isChrome) return "Chrome";
+}
+// 验证码
+function checkStr (str, type) {
+    switch (type) {
+        case 'phone':   //手机号码
+            return /^1[3|4|5|7|8][0-9]{9}$/.test(str);
+        case 'tel':     //座机
+            return /^(0\d{2,3}-\d{7,8})(-\d{1,4})?$/.test(str);
+        case 'card':    //身份证
+            return /^\d{15}|\d{18}$/.test(str);
+        case 'pwd':     //密码以字母开头，长度在6~18之间，只能包含字母、数字和下划线
+            return /^[a-zA-Z]\w{5,17}$/.test(str)
+        case 'postal':  //邮政编码
+            return /[1-9]\d{5}(?!\d)/.test(str);
+        case 'QQ':      //QQ号
+            return /^[1-9][0-9]{4,9}$/.test(str);
+        case 'email':   //邮箱
+            return /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/.test(str);
+        case 'money':   //金额(小数点2位)
+            return /^\d*(?:\.\d{0,2})?$/.test(str);
+        case 'URL':     //网址
+            return /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/.test(str)
+        case 'IP':      //IP
+            return /((?:(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d)\\.){3}(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d))/.test(str);
+        case 'date':    //日期时间
+            return /^(\d{4})\-(\d{2})\-(\d{2}) (\d{2})(?:\:\d{2}|:(\d{2}):(\d{2}))$/.test(str) || /^(\d{4})\-(\d{2})\-(\d{2})$/.test(str)
+        case 'number':  //数字
+            return /^[0-9]$/.test(str);
+        case 'english': //英文
+            return /^[a-zA-Z]+$/.test(str);
+        case 'chinese': //中文
+            return /^[\u4E00-\u9FA5]+$/.test(str);
+        case 'lower':   //小写
+            return /^[a-z]+$/.test(str);
+        case 'upper':   //大写
+            return /^[A-Z]+$/.test(str);
+        case 'HTML':    //HTML标记
+            return /<("[^"]*"|'[^']*'|[^'">])*>/.test(str);
+        default:
+            return true;
+    }
 }
 
