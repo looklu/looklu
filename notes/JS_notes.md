@@ -17,7 +17,7 @@ browser的组成分为：
 5.  Opera —— 2013前presto,后转入blink
 
 几个主要的JS引擎与对应的内核：
-1. V8(C++) —— link —— Chrome
+1. V8(C++) —— blink —— Chrome
 2. SpiderMonkey(C写成,后改进为C++) —— gecko —— Firefox
 3. JavaScriptCore —— webkit —— Safari
 4. Chakra —— EdgeHTML —— Edge
@@ -29,6 +29,28 @@ browser的组成分为：
 1. ECMAScript (欧洲计算机制造协会) 描述了js的语法和基本对象
 1. DOM Document Object Model(文档对象模型) 处理网页内容的方法和接口为文档提供了结构化表示,并定义了如何通过脚本来访问文档结构.目的是为了能让js操作html元素而制定的一个规范.
 1. BOM 浏览器对象模型 与浏览器交互的方法和接口
+
+### 声明变量
+
+全局变量：
+
+1. imply global暗示全局变量:即任何变量,如果变量未经声明就赋值,此变量为全局对象所有;
+1. 一切声明的全局变量,全是window的属性;
+
+变量的声明：使用驼峰命名法或者下划线法，开头不能是数字，名称中可以包含汉字但不能包含中文符号。
+使用var声明的变量会自动被添加到最接近的环境中,在函数内最接近的环境就是函数的局部环境,在with语句中,最接近的环境是with关联的对象.如果初始化变量时没有使用var声明,该变量会直接被添加到全局环境中.
+
+JavaScript变量可以用来保存两种类型的值:基本类型值和引用类型值.基本类型值源自以下5种基本数据类型:Undefined、Null、Number、Boolean和String.
+
+基本类型值和引用类型值具有以下特点:
+
+* 基本类型值在内存中占据固定大小的空间,因此被保存在栈内存中;
+* 从一个变量向另一个变量复制基本类型的值,会创建这个值的一个副本;
+* 引用类型的值是对象,保存在堆内存中;
+* 包含引用类型值的变量实际上包含的并不是对象本身,而是一个指向该对象的指针;
+* 复制引用类型值的变量,复制的其实是指针,因此两个变量最终指向同一个对象;
+* 确定一个值是哪种基本类型使用typeof操作符,确定是哪种引用类型使用instanceOf操作符。
+typeof操作符检测基本数据类型时非常适合，但变量的值是一个对象或null时,typeof会返回object,因此typeof不适合检测引用类型数据。当给定变量是引用类型时，使用instanceof操作符判定。
 
 ### 运算符
 
@@ -53,17 +75,17 @@ browser的组成分为：
 8. 赋值
 9. 逗号最小
 
+
+````
+入口函数:页面加载完毕后,执行函数内的代码
+window.onload = function(){内部放js}
+"javascript:;" "javascript:void(0);" 超链接不跳转
+
 parseInt()、parseFloat()、inNaN()、isFinite()(确定数值是否超过规定范围)
 encodeURI()、encodeURIComponent() //地址编码,encodeURI()不会对本身属于URI的特殊字符进行编码
 decodeURI()、decodeURIComponent() //地址解码
 
-立即执行函数:针对初始化功能的函数；当函数作为表达式时,会立即执行,()可以使内容转换为表达式；只有表达式才能被执行符号执行;被执行符号执行后,函数名即被永久放弃。
-````
-(function(){ console.log("Hello"); })('传递参数');
-!function(){}() || (function(){}()) //使用!、+、- 非正负
-````
-
-js中的内置功能:
+js中的部分内置功能:
 var val = prompt("请输入") 获取用户输入的内容
 windon.alert() 弹出提示框
 console.log() 控制台输出
@@ -71,102 +93,22 @@ console.warn() 控制台警示
 console.error() 控制台错误提示
 document.write() 文档打印输出
 window.prompt('') 用户输入
-
-变量的声明;使用驼峰命名法或者下划线法,开头不能是数字,名称中可以包含汉字但不能包含中文符号
-
-入口函数:页面加载完毕后,执行函数内的代码
-window.onload = function(){内部放js}
-"javascript:;" "javascript:void(0);" 超链接不跳转
+````
 
 在逻辑或和逻辑与中,返回值不一定是布尔值;
 如:var myObject = preferredObject || backupObject;
 变量preferredObject优先赋给变量myObject, 变量backupObject在preferredObject中不包含有效值的情况下提供后备值
 
-**预编译前奏**执行前生效
+#### 条件操作符
+var iable = boolean_expression ? true_value : false_value;
+基于对boolean_expression求值的结果,决定给variable赋什么值；
 
-1. imply global暗示全局变量:即任何变量,如果变量未经声明就赋值,此变量为全局对象所有;
-1. 一切声明的全局变量,全是window的属性;
-
-**预编译**
-预编译发生在函数执行前一刻:
-
-1. 创建AO对象(Activation Object --执行期上下文)
-2. 找形参和变量声明,将变量和形参名作为AO的属性名,值为undefined;
-3. 将实参值和形参统一;
-4. 在函数体里面找函数声明,将函数名作为AO的属性名,属性值被赋予为声明的函数体;
-````
-    console.log(test); //输出 全局test函数体
-    function test(test){
-        console.log(test); //输出 局部test函数体
-        var test = 123;
-        console.log(test);//123
-        function test(){}
-    }
-    test(1);
-    var test =456;
-````
-
-函数中argumens用来储存传入函数的实参，相对应的形参和实参是分别独立的个体，但是存在相互映射关系；但，当个别实参没传入，后创建的形参变量与实参之间不存在映射关系。如下：
-````
-function sum(a,b,c){
-    a=2;
-    console.log(a);//2
-    console.log(arguments[0]);//2
-    arguments[0]=3;
-    console.log(a);//2
-    console.log(arguments[0]);//2
-}
-sum(1,2);
-
-function sum1(a,b,c){
-    b=2;
-    console.log(b);//2
-    console.log(arguments[1]);//undefined
-    arguments[1]=3;
-    console.log(b,arguments[1]);//2,3
-}
-sum1(1);
-````
-**闭包**：函数执行时会生成一个执行期上下文，执行完毕之后，销毁该函数的执行期上下文，而函数内部声明一个方法或对象后，并将之抛到函数之外（return或者留下调用），而子对象是可以访问到父级的执行期上下文，外部却访问不到函数内部属性，此种情况就是闭包。闭包利用的是函数的特殊性，在js中，函数是‘一等公民’，不属于任何谁谁谁，因此不论是在哪里，都可以直接调用函数。
-
-````
-var showT;
-function test(){
-    var tVal = 0;
-    function tAdd(){
-        tVal++;
-        console.log(tVal);
-    }
-    showT = tAdd;
-}
-test();
-showT();//1
-showT();//2
-console.log(tVal);//Uncaught ReferenceError: tVal is not defined
-````
-
-**构造函数内部原理**内部隐式运行
-
-1. 在函数体最前面隐式的加上 var this = {}
-1. 执行this.xxx = xxx;
-1. 隐式的返回this
-
-**this**一般指向
-
-1. 函数预编译过程 this --> window
-1. 全局作用域 this --> window
-1. call/apply 改变函数运行时this指向，区别是传参方式不同；call是逐个传参，apply是数组传参；
-1. obj.func(); func()里面的this指向obj
-
-**逗号操作符**
+#### 逗号操作符
 var a = (1,2);//a=2,返回最后面的值
 
-### 条件操作符
+### 执行语句
 
-var iable = boolean_expression ? true_value : false_value;
-基于对boolean_expression求值的结果,决定给variable赋什么值
-
-### if语句
+#### if语句
 
 语法: if (condition) statement1 else statement2
 其中的condition(条件)可以是任意表达式;而且对这个表达式求值的结果不一定是布尔值.ECMAScript会自动调用Boolean()转换函数将这个表达式的结果转换为一个布尔值,如果对condition求值结果是true,则执行statement1(语句1),如果对condition求值的结果是false.则执行statement2(语句2)。
@@ -178,64 +120,57 @@ if（function f(){console.log('this is f');}){
     //括号这的表达式执行完之后就会销毁
 }
 ````
-### do-while语句("直到"型循环)
+#### do-while语句("直到"型循环)
 
 do-while语句是一种后测试循环语句,即只在循环体中的代码执行之后,才会测试出口条件.在对条件表达式求值之前,至少被执行一次
 语法: do {
     statement
 } while (expression)
 
-### while语句("当"型循环)
+#### while语句("当"型循环)
 
 while语句属于前测试循环语句,在循环体内的代码被执行之前,就会对出口条件求值.因此,循环体内的代码有可能永远不会被执行.
 语法: while(expression){
     statement
 }
 
-### for语句
+#### for语句
 
 for语句也是前测试循环语句, 但它具有在执行循环之前初始化变量和定义循环后要执行的代码的能力.(在循环中定义的初始化变量在外部可以访问到)
 语法: for (initialization; expression; post-loop-expression){
     statement
 }
 
-### for-in语句
+#### for-in语句
 
-for-in语句是一种精准的迭代语句,可以用来枚举对象属性.
+for-in语句是一种精准的迭代语句，可以用来枚举对象属性。
+````
 语法: for (property in expression){
     statement
 }
-如: for (var propName in window){
-    document.write(propName);
+
+for (var propName in window){
+    //遍历拥有的属性(obj[prop])
+    console.loh(propName);
 }
-obj.prop ---> obj['prop']
+````
+这里控制语句中的var操作符也不是必需的,但是可以保证使用局部变量.当要迭代的对象的变量为null或undefined,for-in语句会抛出错误，在ECMAScript5之后更正了这一行为，不再抛出错误，而只是不执行循环体。
 
-1.hasOwnProperty() 2.in 3.instanceof()
-
-hasOwnProperty()识别属性是否是自身属性
-'propName' in obj;
-A instanceof B  A对象 是不是 B构造函数构造出来的(看A对象的原型链上 有没有 B的原型)
-
-这里控制语句中的var操作符也不是必需的,但是可以保证使用局部变量.当要迭代的对象的变量为null或undefined,for-in语句会抛出错误,在ECMAScript5之后更正了这一行为,不再抛出错误,而只是不执行循环体.
-typeof操作符检测基本数据类型时非常适合,但变量的值是一个对象或null时,typeof会返回object,因此typeof不适合检测引用类型数据.当给定变量是引用类型时,使用instanceof操作符判定.
-instanceof语法: result = variable instanceof constructor
-如: alert(person instanceof RegExp);//变量person是RegExp吗?
-
-### break和continue语句
+#### break和continue语句
 
 break和continue语句用于在循环中精确的控制代码的执行.其中break语句会立即退出循环,强制执行循环后面的语句.continue虽然也是立即退出循环,但在退出循环后会从循环的顶部继续执行.
 
-### label语句
+#### label语句
 
-使用label语句可以在代码中添加标签,以便将来使用.
-语法: label: statement
+使用label语句可以在代码中添加标签，以便将来使用。
+语法：label: statement
 ````
 begin: for (var i = 0; i < 10 ; i++ ){
     alert(i);
 }
 ````
 
-#### Label 的应用:(未添加 Label)
+label 的应用(未添加 label)：
 ````
     var num = 0;
     for (var i = 0 ; i < 10 ; i++){
@@ -260,7 +195,8 @@ begin: for (var i = 0; i < 10 ; i++ ){
     console.log(num);
     //循环在 j 为5时,跳过 j 为5的循环,但后面的循环继续,输出99
 ````
-#### 对比使用了 Label 之后的程序:(添加 Label 后)
+
+对比使用了 label 之后的程序(添加 label 后)：
 ````
     var num = 0;
     outPoint:
@@ -288,7 +224,7 @@ begin: for (var i = 0; i < 10 ; i++ ){
     //循环在 j 为5时,跳过双循环,但后面的循环继续,输出95
 ````
 
-### with语句
+#### with语句
 
 with语句的作用是将代码的作用域设置到一个特定的对象中.
 语法: with (expression) statement;
@@ -304,9 +240,10 @@ instance:
         var url = href;
     }
 
-### switch语句
+#### switch语句
 
 switch语句与if语句的关系最为密切,而且也是在其他语言中普遍使用的一种流控制语句.ECMAScript中switch语句的语法与其他基于C的语言非常接近.
+````
 expression:
     switch (expression){
         case value: statement
@@ -317,8 +254,10 @@ expression:
         break;
         default: statement
     }
+````
 
 switch语句中的每一种情形(case)的含义是:"如果表达式等于这个value,则执行后面的statement",而break关键字会使代码执行流跳出switch语句.如果省略break关键字,就会导致执行完当前case后,继续执行下一个case.最后的default关键字则用于在表达式不匹配前面的case时,执行机动代码(相当于一个else语句).
+````
 instance:
     switch (i){
         case 10:
@@ -332,21 +271,7 @@ instance:
         default:
         alert ("Other");
     }
-
-### 声明变量
-
-使用var声明的变量会自动被添加到最接近的环境中,在函数内最接近的环境就是函数的局部环境,在with语句中,最接近的环境是函数环境.如果初始化变量时没有使用var声明,该变量会直接被添加到全局环境中.
-
-JavaScript变量可以用来保存两种类型的值:基本类型值和引用类型值.基本类型值源自以下5种基本数据类型:Undefined、Null、Number、Boolean和String.
-
-基本类型值和引用类型值具有以下特点:
-
-* 基本类型值在内存中占据固定大小的空间,因此被保存在栈内存中;
-* 从一个变量向另一个变量复制基本类型的值,会创建这个值的一个副本;
-* 引用类型的值是对象,保存在堆内存中;
-* 包含引用类型值的变量实际上包含的并不是对象本身,而是一个指向该对象的指针;
-* 复制引用类型值的变量,复制的其实是指针,因此两个变量最终指向同一个对象;
-* 确定一个值是哪种基本类型可以使用typeof操作符,确定是哪种引用类型可以使用instanceOf操作符.
+````
 
 ### 引用类型数据
 
@@ -507,21 +432,58 @@ setInterval("hui()",3000,"你好")//起作用,弹出undefined
 
 #### Function
 
-在函数内部具有两个特殊对象:arguments和this.
+函数的名字仅仅是一个包含指针的变量而已！
+1. 在函数内部具有两个特殊对象：arguments和this；
+2. 每个函数都具有两个属性length和prototype；
+    1. length表示函数设置的形参个数；
+    2. prototype对于ECNAScript中的引用类型而言,是保存它们所有实例方法的真正所在；
+3. 每个函数都具有两个方法call()和apply()，用途都是在特定的作用域中调用函数，实际上就是改变this指向；
+4. ECMAScript5规范化了函数对象的属性:caller.这个属性中保存着调用当前函数的函数引用，严格模式中不能使用；
 
-1. **函数的名字仅仅是一个包含指针的变量而已**
+##### arguments
 
-1. arguments是一个类数组对象,包含着传入函数的所有参数.这个对象有一个叫callee的属性,callee是个指针,指向拥有这个arguments对象的函数.
+argumens是一个类数组对象，用来储存传入函数的所有实际参数。arguments有一个callee属性,callee是个指针，指向拥有这个arguments对象的函数。
+相对应的形参和实参是分别独立的个体，但是存在相互映射关系；但，当个别形参没有实参传入，后创建的形参变量与实参之间不存在映射关系。如下：
+````
+function sum(a,b,c){
+    a=2;
+    console.log(a);//2
+    console.log(arguments[0]);//2
+    arguments[0]=3;
+    console.log(a);//2
+    console.log(arguments[0]);//2
+}
+sum(1,2);
 
-1. this与Java和C#中的this类似.在调用函数前,this的值并不确定, this引用的是函数执行的环境对象.(this指包含它的函数作为方法被调用时所属的对象)
+function sum1(a,b,c){
+    var b=2;
+    console.log(b);//2
+    console.log(arguments[1]);//undefined
+    arguments[1]=3;
+    console.log(b,arguments[1]);//2,3
+}
+sum1(1);
+````
 
-1. ECMAScript5规范化了函数对象的属性:caller.这个属性中保存着调用当前函数的函数引用.
+##### this
 
-1. length属性表示函数希望接收的命名参数的个数.
+this引用的是函数赖以执行的环境对象，this一般指向如下：
 
-1. prototype对于ECNAScript中的引用类型而言,是保存它们所有实例方法的真正所在.
+1. 函数预编译过程 this --> window
+1. 全局作用域 this --> window
+1. call/apply 改变函数运行时this指向，区别是传参方式不同；call是逐个传参，apply是数组传参；
+1. obj.func(); func()里面的this指向obj；
 
-call()和apply() 改变this指向(借用别人的函数实现自己的功能)
+在构造函数中，this指向的是一个新生成的对象，函数执行完毕后必须返回一个引用类型值，默认是this。
+也可以理解成构造函数内部原理是内部隐式运行如下代码：
+
+1. 在函数体最前面隐式的加上 var this = {}
+1. 执行this.xxx = xxx;
+1. 隐式的返回this
+
+##### call()和apply()
+call()和apply() 改变this指向，call接受逐个传参，apply接受数组传参;
+````
 function Person(name,age,sex){
 this.name = name;
 this.age = age;
@@ -533,6 +495,56 @@ this.tel;
 this.grade;
 }
 var student = new Student('sunny',123,'male',139,2017);
+````
+
+##### 预编译
+
+预编译发生在函数执行前一刻:
+
+1. 创建AO对象(Activation Object --执行期上下文)
+2. 找形参和变量声明,将变量和形参名作为AO的属性名,值为undefined;
+3. 将实参值和形参统一;
+4. 在函数体里面找函数声明,将函数名作为AO的属性名,属性值被赋予为声明的函数体;
+````
+console.log(test); //输出 全局test函数体
+test(1);
+var test =0;
+function test(test){
+    console.log(test); //输出 局部test函数体
+    function test(){}
+    var test = 123;
+    console.log(test);//123
+}
+console.log(test); //0
+var test =456;
+console.log(test);//456
+````
+##### 闭包
+
+函数执行时会生成一个执行期上下文，执行完毕之后，销毁该函数的执行期上下文，而函数内部声明一个方法或对象后，并将之抛到函数之外（return或者留下调用指针），而子对象是可以访问到父级的执行期上下文，外部却访问不到函数内部属性，此种情况就是闭包。闭包利用的是函数的特殊性，在js中，函数是‘一等公民’，不属于任何谁谁谁，因此不论是在哪里，都可以直接调用函数。
+
+````
+var showT;
+function test(){
+    var tVal = 0;
+    function tAdd(){
+        tVal++;
+        console.log(tVal);
+    }
+    showT = tAdd;
+}
+test();
+showT();//1
+showT();//2
+console.log(tVal);//Uncaught ReferenceError: tVal is not defined
+````
+##### 立即执行函数
+
+立即执行函数：针对初始化功能的函数；当函数作为表达式时，会立即执行，()可以使内容转换为表达式；只有表达式才能被执行符号执行;被执行符号执行后，函数名即被永久放弃。
+````
+(function(){ console.log("Hello"); })('传递参数');
+!function(){}() || (function(){}()) //使用!、+、- 非正负
+````
 
 #### String对象包装类
 
@@ -667,17 +679,13 @@ Object.create(原型Object或null);创建对象
     }
     var student = new Student('sunny',123,'male',139,3);
 
-*for in*
-    for(var prop in obj){
-        //遍历拥有的属性(obj[prop])
-    }
-
-1. hasOwnProperty(prop)函数用于指示一个对象自身(不包括原型链)是否具有指定名称的属性.如果有,返回true,否则返回false.
-1. in
-1. instanceof
-
-'prop' in obj   判断属性是否在obj上(原型上的自设属性也参与判断)
-使用hasOwnProperty()方法可以识别 是自身属性还是原型上的自设属性(原型上的默认属性忽略)
+1. obj.hasOwnProperty(prop) 判断对象自身是否具有指定名称的属性，如果有返回true，否则返回false；
+2. in
+    prop in obj   判断obj是否有属性prop，原型链上的自设属性也参与判断，默认属性忽略；
+3. instanceof
+    A instanceof B  判断对象A是不是B构造函数构造出来的（判断对象A的原型链上有没有B的原型）
+    判断A的数据类型: A instanceof B --> A.constructor --> Object.prototype.toString.call(A)
+````
     function Animal(name){
         this.name = name;
     }
@@ -693,22 +701,18 @@ Object.create(原型Object或null);创建对象
             console.log(p); //name eag eat
         }
     }
-
-A instanceof B 判断A对象的原型链上有没有B的原型
-
-判断A的数据类型: A instanceof B --> A.constructor --> Object.prototype.toString.call(A)
-
-*继承--圣杯模式*
-    function inherit(Target,Origin){
-        function F(){};
-        F.prototype = Origin.prototype;
-        Target.prototype = new F();
-        Target.prototype.constructor = Target;
-        Target.prototype.uber = Origin.prototype;
-    }
-
-条件判断? 是:否 并且会返回值;
-
+````
+#### 继承--圣杯模式
+````
+function inherit(Target,Origin){
+    function F(){};
+    F.prototype = Origin.prototype;
+    Target.prototype = new F();
+    Target.prototype.constructor = Target;
+    Target.prototype.uber = Origin.prototype;
+}
+````
+````
  try{
 
      //当try中的代码报错时,不抛出error,不会执行错误后的try里面的代码
@@ -716,17 +720,19 @@ A instanceof B 判断A对象的原型链上有没有B的原型
      //捕捉到错误时,才执行
  }
  try{}catch(e){}finally{}
+````
  Error.name的六种值对应的信息:
 1. EvalError: eval()的使用与定义不一致
-1. RangeError: 数值越界
-1. ReferenceError: 非法或不能识别的引用数值
-1. SyntaxError: 发生语法解析错误
-1. TypeError: 操作数类型错误
-1. URIError: URI处理函数使用不当
+2. RangeError: 数值越界
+3. ReferenceError: 非法或不能识别的引用数值
+4. SyntaxError: 发生语法解析错误
+5. TypeError: 操作数类型错误
+6. URIError: URI处理函数使用不当
 
-**严格模式**
+### 严格模式
+
 启动es5.0标准模式,那么es3.0和es5.0产生冲突的部分就是使用es5.0解决,否则使用es3.0
-"use strict";//分为全局严格模式和局部函数内严格模式(推荐)
+`"use strict";//分为全局严格模式和局部函数内严格模式(推荐)`
 
 不允许使用:
 with();
