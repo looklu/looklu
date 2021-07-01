@@ -187,15 +187,14 @@ textarea文本域禁止改变大小 resize:none；
 
 凡是带有（display）inline的元素，都具有文字特性；因此行内块儿元素（表单，图片）之间有缝隙，那是空格（文字分隔符）在生效；
 解决方法：
-1. img标签写在同一行（删除img之间的空格）；
-2. img父级标签设置font-size为0；
-3. img设置display为block，设置float为left；
-4. 设置img的letter-spacing为负的任何值均可(貌似无效),`letter-spacing:-800px`；
-5. 将要闭合标签的地方与开始标签的地方重合
-```
+1. img父级标签设置font-size为0；
+2. img设置display为block，设置float为left；
+3. 设置img的letter-spacing为负的任何值均可(貌似无效),`letter-spacing:-800px`；
+4. 删除img标签之间的空格或回车（写在同一行或将标签要闭合的地方与后一标签开始的地方写在一起，如下：）；
+````
 <img src="/i/eg_tulip.jpg" alt="郁金香" height="100px"
 /><img src="/i/eg_tulip.jpg" alt="郁金香" height="100px" />
-```
+````
 去掉图片底侧默认的3像素空白 `vertical-align:middle; || display：block;`
 
 cursor光标样式：default白色指针，pointer小手，move移动，text文本输入，help问号
@@ -204,7 +203,7 @@ cursor光标样式：default白色指针，pointer小手，move移动，text文�
 
 块级元素margin上、下、左、右可以设置，行内元素margin可以设置左、右(部分浏览器不支持上下);
 
-高度剩余法、宽度剩余法(相对于margin等写法，速度较快)
+间距可以使用高度剩余法、宽度剩余法(相对于margin等写法，速度较快)
 
 nav：dropdown、navitems、navright;
 底部：links、copyright、message;

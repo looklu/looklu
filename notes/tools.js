@@ -18,7 +18,29 @@ function txtType(data){
     }
     return rTxt;
 }
-
+// 判断值是否为空值，如果是undefined， null， ''， NaN，false，0，[]，{} ，空白字符串，都返回true，否则返回false
+function isEmpty(v) {
+    switch (typeof v) {
+    case 'undefined':
+        return true;
+    case 'string':
+        if (v.replace(/(^[ \t\n\r]*)|([ \t\n\r]*$)/g, '').length == 0) return true;
+        break;
+    case 'boolean':
+        if (!v) return true;
+        break;
+    case 'number':
+        if (0 === v || isNaN(v)) return true;
+        break;
+    case 'object':
+        if (null === v || v.length === 0) return true;
+        for (var i in v) {
+            return false;
+        }
+        return true;
+    }
+    return false;
+}
 // 数据深度克隆,在js中引用类型数据的赋值和调用，使用的都是堆内存中的数据的位置指针；
 // 1 只能复制符合JSON数据格式要求的数据
 let copy = JSON.parse(JSON.stringify(target));

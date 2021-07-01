@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tab选项卡</title>
+    <style>
+        ul{list-style: none;padding: 0;margin: 0;}
+        .tabTop li{float: left;padding: 10px;border: 1px solid #ccc;margin-right: 10px;}
+        .tabTop ul::after{display: block;content: '';clear: both;}
+        .tabTop li.active{color: #fff;background-color: greenyellow;}
+        .tabContent li{display: none;}
+        .tabContent li.active{display: block;}
+    </style>
+</head>
+<body>
+    <div class="tabs">
+        <nav class="tabTop">
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+            </ul>
+        </nav>
+        <section class="tabContent">
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+            </ul>
+        </section>
+    </div>
+</body>
+<script>
+    unitTab();
+function unitTab(num){
+    var topLi = document.querySelectorAll('.tabTop li'),
+    conLi = document.querySelectorAll('.tabContent li');
+    for (var i = 0, len = topLi.length; i < len; i++) {
+        (function (n) {
+            topLi[i].onclick = function () {
+                var top=document.querySelector('.tabTop li.active'),
+                con = document.querySelector('.tabContent li.active');
+                top?top.className='':'';
+                con?con.className='':'';
+                this.className = 'active';
+                conLi[n].className='active';
+            }
+        })(i);
+    }
+    num=num?num:1
+    topLi[num-1].className = 'active';
+    conLi[num-1].className = 'active';
+}
+</script>
+</html>

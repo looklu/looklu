@@ -40,17 +40,18 @@ browser的组成分为：
 变量的声明：使用驼峰命名法或者下划线法，开头不能是数字，名称中可以包含汉字但不能包含中文符号。
 使用var声明的变量会自动被添加到最接近的环境中,在函数内最接近的环境就是函数的局部环境,在with语句中,最接近的环境是with关联的对象.如果初始化变量时没有使用var声明,该变量会直接被添加到全局环境中.
 
-JavaScript变量可以用来保存两种类型的值:基本类型值和引用类型值.基本类型值源自以下5种基本数据类型:Undefined、Null、Number、Boolean和String.
-
-基本类型值和引用类型值具有以下特点:
-
-* 基本类型值在内存中占据固定大小的空间,因此被保存在栈内存中;
-* 从一个变量向另一个变量复制基本类型的值,会创建这个值的一个副本;
+JavaScript变量可以用来保存两种类型的值:基本类型值和引用类型值。
+基本类型值有下5种基本数据类型:Undefined、Null、Number、Boolean、String。
+null表示的是一个空对象指针，一个空的指针，null≠空对象，Boolean(null)=false，Boolean({})=true，typeof null会返回object。
+undefind派生自null，表示表示变量声明了未初始化前的一种状态，因此`console.log(undefined==null);//true`；
+基本类型值和引用类型值具有以下特点：
+* 基本类型值在内存中占据固定大小的空间,保存在栈内存中;
+* 从一个变量向另一个变量复制基本类型的值,会直接创建这个值的一个副本;
 * 引用类型的值是对象,保存在堆内存中;
 * 包含引用类型值的变量实际上包含的并不是对象本身,而是一个指向该对象的指针;
 * 复制引用类型值的变量,复制的其实是指针,因此两个变量最终指向同一个对象;
-* 确定一个值是哪种基本类型使用typeof操作符,确定是哪种引用类型使用instanceOf操作符。
-typeof操作符检测基本数据类型时非常适合，但变量的值是一个对象或null时,typeof会返回object,因此typeof不适合检测引用类型数据。当给定变量是引用类型时，使用instanceof操作符判定。
+* 确定一个值是哪种基本类型值使用typeof操作符,确定是哪种引用类型值使用instanceOf操作符。
+
 
 ### 运算符
 
@@ -75,17 +76,13 @@ typeof操作符检测基本数据类型时非常适合，但变量的值是一�
 8. 赋值
 9. 逗号最小
 
-
 ````
-入口函数:页面加载完毕后,执行函数内的代码
-window.onload = function(){内部放js}
+js中的部分内置功能:
 "javascript:;" "javascript:void(0);" 超链接不跳转
 
 parseInt()、parseFloat()、inNaN()、isFinite()(确定数值是否超过规定范围)
 encodeURI()、encodeURIComponent() //地址编码,encodeURI()不会对本身属于URI的特殊字符进行编码
 decodeURI()、decodeURIComponent() //地址解码
-
-js中的部分内置功能:
 var val = prompt("请输入") 获取用户输入的内容
 windon.alert() 弹出提示框
 console.log() 控制台输出
@@ -120,30 +117,24 @@ if（function f(){console.log('this is f');}){
     //括号这的表达式执行完之后就会销毁
 }
 ````
+#### while语句("当"型循环)
+
+while语句属于前测试循环语句,在循环体内的代码被执行之前,会对出口条件求值.因此,循环体内的代码有可能永远不会被执行.
+语法: `while(expression){ statement }`
+
 #### do-while语句("直到"型循环)
 
 do-while语句是一种后测试循环语句,即只在循环体中的代码执行之后,才会测试出口条件.在对条件表达式求值之前,至少被执行一次
-语法: do {
-    statement
-} while (expression)
-
-#### while语句("当"型循环)
-
-while语句属于前测试循环语句,在循环体内的代码被执行之前,就会对出口条件求值.因此,循环体内的代码有可能永远不会被执行.
-语法: while(expression){
-    statement
-}
+语法: `do { statement } while (expression)`
 
 #### for语句
 
 for语句也是前测试循环语句, 但它具有在执行循环之前初始化变量和定义循环后要执行的代码的能力.(在循环中定义的初始化变量在外部可以访问到)
-语法: for (initialization; expression; post-loop-expression){
-    statement
-}
+语法: `for(initialization; expression; post-loop-expression){ statement }//执行体为空，可以不写`
 
 #### for-in语句
 
-for-in语句是一种精准的迭代语句，可以用来枚举对象属性。
+for-in语句是一种精准的迭代语句，可以用来枚举对象属性，默认属性忽略。
 ````
 语法: for (property in expression){
     statement
@@ -277,36 +268,37 @@ instance:
 
 #### Object
 
-object：创建Object实例的方式有两种:
-
+创建Object实例的方式有两种:
+````
 1. 使用new操作符后跟Object构造函数:
     var person = new Object();
     person.name = "Nicholas";
     person.age = 25;
 
-1. 使用对象字面量表示法:
+2. 使用对象字面量表示法:
     var person = {
         name : "Nicholas"',
         age　:　25
     }
+````
 
-访问对象属性时,可以通过点表示法或者方括号表示法,这两种方法没有区别:
-    //在使用方括号语法时,应该将要访问的属性(**字符串**)放在方括号中
-    alert(person["name"]);
-    alert(person.name);
-但方括号语法的主要优点是可以通过变量来访问属性:
-    var propertyName = "name";
-    alert(person[propertyName]);
-
-如果属性命中包含会导致语法错误的字符或者属性名使用的是关键字或保留字,也可以使用方括号表示法
-    person["first name"] = "Nicholas";
-
+访问对象属性时,可以通过点表示法或者方括号表示法,这两种方法没有区别，但方括号表示法的主要优点是可以通过变量来访问属性，如果属性名中包含会导致语法错误的字符或者属性名使用的是关键字或保留字,使用方括号表示法可以避免错误：
+````
+var obj = {
+first name:'obj'，
+txt:'txt'
+},
+txt = 'first name';
+console.log(obj.txt);//txt
+console.log(obj[txt]);//obj
+````
 所有对象都具有toLocaleString()、toString()和valueOf()方法.
 
-**类数组**特殊对象
+**类数组对象**
 1. 属性要为索引(数字)属性,必须有length属性,最好加上push
-1. 具有数组和对象的特性
+2. 具有数组和对象的特性
 
+````
 var obj = {
     '0' : 'a',
     '1' : 'b',
@@ -318,22 +310,24 @@ var obj = {
     splice : Array.prototype.splice
 }
 push方法的原理:
-    Array.prototype.push = function (){
-        for(var i=0;i<arguments.length;i++){
-            this[this.length] = arguments[i];
-            this.length ++;
-        }
+Array.prototype.push = function (){
+    for(var i=0;i<arguments.length;i++){
+        this[this.length] = arguments[i];
+        this.length ++;
     }
+}
+
+````
 
 #### Array
 
-创建Array有两种方法,构造函数法和字面量表示法:
+创建array有两种方法,构造函数法和字面量表示法:
 ````
 var colors1 = new Array();
 var colors2 = Array();
 var colors3 = ["blue","red",3,"green"];
 ````
-ECMAScript5新增的Array.isArray()方法可以确定某个值到底是不是数组,而不管它是哪个全局环境创建的.
+ECMAScript5新增的Array.isArray()方法可以确定某个值到底是不是数组,而不管它是哪个全局环境创建的。
 ````
 expression:
 if (Array.isArray(value)){
@@ -354,7 +348,11 @@ slice(start,end)返回数组切片
 splice(start,amount,newdata)替换项,返回删除项组成的数组
 reverse()反转原来的数组,返回该数组,但不会创建新的数组
 sort()可以接收一个比较函数,返回操作后的数组
-sort(function(a,b){return a-b;}),返回值为负数或0时,位置不变;为正数,两数交换位置；
+````
+sort(function(a,b){return a-b;});
+sort
+//返回值为负数或0时，位置不变；为正数，两数交换位置；
+````
 
 indexOf(),lastIndexOf()都可以接收两个参数,第一个是检索项,第二个是起点位置的索引,最后都返回查找项所在的位置索引，无匹配项返回-1，第一个参数与各项比较时使用的是全等操作符（===）；
 
@@ -747,53 +745,63 @@ eval('');//把字符串当作代码使用,es5.0可以使用,es3.0不能使用
 函数必须声明在整个脚本或函数层面
 常规模式下，在语句块中声明函数会使得程序的结果不可预料，也会使可读性变得很糟糕
 
-## DOM-->Document Object Model
+## DOM（Document Object Model）
 
-Dom定义表示和修改文档所需的方法.Dom对象即为宿主对象,由浏览器厂商定义,用来操作html和xml功能的一类对象的集合.也有人称Dom是对html以及xml的标准编程接口.
+DOM 定义了表示和修改文档所需的方法.Dom对象即为宿主对象,由浏览器厂商定义,用来操作html和xml功能的一类对象的集合。也有人称DOM是对HTML以及XML的标准编程接口。
 document代表整个文档
 
-### 访问关系
+### 获取DOM元素
 
 getElementsByTagName('lable');  //获取相同的元素节点
 getElementsByClassName();  //获取相同class的元素节点,可以多个,ie8及以下没有
 getElementsByName();  //获取相同name的元素节点(需注意,只有部分标签可生效表单、img、iframe)
 getElementById('id');  //获取特定id的元素节点
 
-.querySelector('div > span strong')//可以像css选择器使用(实时性不好,就像照片与本人,静态)
+.querySelector('div > span strong')//可以像css选择器使用(实时性不好,就像照片与实物之间没有关联性,静态)
 .querySelectorAll()//生成类数组
 
-**节点树的遍历**
-节点具四个属性:nodeName、nodeType、nodeValue(只有text节点或comment节点可读写)、attributes(属性节点的集合)
-每个节点都有一个方法 node.hasChildNodes;//有没有子节点
-父节点
-parentNode获取当前节点的父节点
-兄弟节点
-nextSibling 后一个兄弟节点  IE678认识
-nextElementSibling 下一个同胞兄弟节点  其他浏览器认识的
-previousSibling 前一个节点  IE678认识
-previousElementSibling 上一个同胞兄弟节点  其他浏览器认识的
-孩子节点
-childNodes 获取所有的子节点(嫡系) 使用 nodetype == 1 获取元素节点(2属性节点,3文本节点)
-firstChild 第一个子节点   IE678
-firstElementChild 第一个子元素节点   其他浏览器认识的
-lastChild 最后一个子节点   IE678
-lastElementChild 最后一个子元素节点   其他浏览器认识的
-空格换行也是节点(文本节点,nodeType为3)
+#### 节点关系
+
+页面是由各种节点组成的
+节点的四个属性:nodeName、nodeType、nodeValue(只有text节点或comment节点可读写)、attributes(属性节点的集合)
+每个节点都有一个方法 node.hasChildNodes() 判断有无子节点，返回true或false
 
 元素节点 1
 属性节点 2
-文本节点 3
-注释节点 8
+文本节点 3 空格换行是文本节点
+comment 8 注释节点
 document 9
 DocumentFragment 11
 
-**基于元素结点树的遍历**
-(除了children,其他的属性IE9之前都不兼容)
-parentElement() 返回当前元素节点的父元素节点(IE9之前不兼容)
-children 只返回当前元素的元素子节点,类数组
-//childElementCount ===children.length 当前子元素的个数
-firstElementChild  lastElementChild(IE9之前不兼容)
-previousElementSibling  nextElementSibling(IE9之前不兼容)
+1. 父节点节点
+    parentNode 获取当前节点的父节点 最顶端的parentNode是 #document
+2. 兄弟节点
+    nextSibling 后一个兄弟节点  IE678认识
+    nextElementSibling 下一个同胞兄弟节点  其他浏览器认识的
+    previousSibling 前一个节点  IE678认识
+    previousElementSibling 上一个同胞兄弟节点  其他浏览器认识的
+3. 孩子节点
+    childNodes 获取所有的子节点(嫡系) 使用 nodetype == 1 获取元素节点(2属性节点,3文本节点)
+    firstChild 第一个子节点   IE678
+    firstElementChild 第一个子元素节点   其他浏览器认识的
+    lastChild 最后一个子节点   IE678
+    lastElementChild 最后一个子元素节点   其他浏览器认识的
+
+#### 元素关系
+
+1. 父级
+    parentElement 返回当前元素的父元素
+2. 兄弟
+    previousElementSibling
+    nextElementSibling
+
+3. 子级
+    children 只返回当前元素的子元素,类数组
+        childElementCount === children.length 子元素个数
+    firstElementChild
+    lastElementChild
+
+除了 children ，其他的属性IE9之前都不兼容！
 
 **增**
 document.createElement() 创建元素节点
@@ -807,8 +815,8 @@ parentNode.insertBefore(插入的节点,参照的节点) 将新节点插入在�
 他杀 parentNode.removeChild() 移除节点,返回删除项(将对象剪切出来)
 自杀 child.remove() 直接销毁,没有返回对象
 **替换**
-replaceChild(new,origin) (新节点,要替换的节点)
-
+replaceChild(new,origin) (新节点,b替换的节点) 返回被替换节点
+**复制**
 cloneNode() 克隆节点 可以带参数,参数为true深层复制(子节点也复制),参数为false浅层复制(只复制本身)
 
 **Element的一些属性**
